@@ -1,0 +1,518 @@
+#headers{
+    background-color: #100E63;
+    height: 4rem;
+    display: flex;
+    align-items: center;
+}
+.headerBox{
+    margin-left: 2rem;
+}
+.headerLogoTitle{
+    color:white;
+    font-size:2rem;
+}
+.banner{
+    height: 300px;
+    background: linear-gradient(60deg, rgb(7, 5, 94) 10%, rgba(16, 14, 99, 1) 50%, rgb(54, 51, 203) 80%, rgba(178, 200, 255, 1) 100%);
+    display: flex;
+    align-items: center;
+}
+.banner h1{
+    padding-left: 200px;
+    font-size: 3.8rem;
+    color: white;
+    line-height: 1.5;
+}
+.note_banner{
+    height: 15rem;
+    width: 100%;
+    background-color: #f9e073;
+    margin-left: -10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    background-image: linear-gradient(200deg, #f5d656 25%, transparent 25%, transparent 50%, #f5d656 50%, #f5d656 75%, transparent 75%, transparent);
+    flex-direction: column;
+}
+.note_box{
+    display: flex;
+    flex-wrap: wrap;
+    width:1000px;
+    margin:auto;
+}
+ul, li, ol{
+    margin:0px;
+    padding:0px;
+}
+.note_box li{
+    border: 1px solid #dedede;
+    border-radius: 6px;
+    height: 100%;
+    list-style: none;
+}
+.note_box > li {
+    width: 240px;
+    margin: 10px 4px;
+}
+.note_box img {
+    display: block;
+    width: 35%;
+}
+.note_select{
+    height: 150px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.note_box > li> a{
+    margin: 20px 0px;
+    height:1000px;
+}
+.note_box a{
+    color:black;
+}
+.note_box li:hover{
+    background-color: rgb(248, 248, 248);
+}
+
+/** 내부 페이지 */
+.note_top{
+    border:2px solid rgb(200, 200, 200);
+    width:50rem;
+    margin: auto;
+    margin-top: 2rem;
+    position: relative;
+    overflow:hidden;
+}
+.note_top > div{
+    margin: 2rem 4rem;
+}
+.note_top img{
+    position: absolute;
+    right: -3rem;
+    top: -5rem;
+    height: 15rem;
+    filter:brightness(180%);
+    object-fit:cover;
+    z-index: -1;
+}
+.index{
+    width:50rem;
+    margin: auto;
+    margin-top: 3rem;
+    border: 1px solid rgb(200,200,200);
+    background-color: rgb(248, 248, 248);
+    padding: 0rem 0rem 1rem;
+}
+.content{
+    width:50rem;
+    margin: auto;
+    margin-top: 3rem;
+    border: 1px solid rgb(200,200,200);
+    background-color: rgb(248, 248, 248);
+}
+.contentIndex{
+    width:50rem;
+    margin: auto;
+    margin-top: 3rem;
+    border: 1px solid rgb(200,200,200);
+    background-color: rgb(248, 248, 248);
+    padding: 1rem 0rem 1rem;
+}
+.indexFirst{
+    margin:0rem 4rem;
+}
+.indexContent{
+    margin-left: 1rem;
+}
+.indexContent a{
+    font-size:1.2rem;
+    display: flex;
+    align-items: center;
+    color:#5f6368;
+}
+.indexContent a > img{
+    height:1.1rem;
+    margin-left: 1rem;
+    margin-bottom: 2px;
+}
+.indexTitle{
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid black;
+    font-size: 1.2rem;
+}
+.indexTitle:nth-child(n+1){
+    margin-top: 1rem;
+}
+.indexContent > ul > li{
+    padding:1rem 0rem;
+    border-bottom: 1px solid rgb(200,200,200);
+    list-style: none;
+}
+.indexTitle h2{
+    padding-left: 0.5rem;
+}
+.indexTitle > img{
+    height: 40px;
+}
+.contentTitle h1{
+    font-size: 2rem;
+}
+.contentTitle a{
+    background-color: #555555;
+    color:white;
+    font-size:1.2rem;
+    padding:0.3rem 0.5rem;
+    border-radius: 5px;
+    width: 34px;
+}
+.contentIndex ul li{
+    list-style: none;
+    margin: 0.5rem 0.2rem;
+    font-size:1.1rem
+}
+.contentIndex{
+    margin-top: 1rem;
+}
+.contentBox{
+    padding: 0rem 0rem 1rem;
+}
+.contentBoxTitle{
+    padding-top: 1rem;
+}
+.contentBox, .contentIndex > div{
+    margin:0rem 1.5rem;
+}
+.boldBorder{
+    border-bottom: 2px solid #555555;
+}
+.lightBorder{
+    border-bottom: 1px solid #9c9c9c;
+    padding: 0rem 0rem 1rem;
+}
+.contentBoxSubTitle{
+    margin-top: 1rem;
+}
+.important{
+    text-decoration: underline;
+    text-decoration-color: rgb(226, 214, 40) ;
+    text-decoration-thickness: 3px;
+}
+.fullbox{
+    border: 2px solid rgb(200, 200, 200);
+    border-radius: 5px;
+    margin-top: 0.5rem;
+}
+.boxTop{
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border-radius: 3px 3px 0px 0px;
+    padding:0.3rem 0rem;
+}
+.boxTop img{
+    margin-left: 0.7rem;
+    height: 1.5rem;
+}
+.boxTop h4{
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+}
+.boxBottom{
+    padding:0.5rem;
+}
+.goback{
+    width:100%;
+    border:2px solid white;
+    background-color: white;
+    color:black;
+    margin: auto;
+    text-align: center;
+    font-size: 1.1rem;
+    padding: 0.5rem 0rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.goback img{
+    height: 1.1rem;
+}
+.buttons{
+    display: flex;
+}
+.goback:hover{
+    background-color: rgb(248, 248, 248);
+}
+.halfboxContainer{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.halfbox{
+    width:47%;
+    margin-top: 1rem;
+}
+.halfboxImg{
+    display: flex;
+    justify-content: center;
+}
+.halfbox img{
+    width:90%;
+    margin: 0.7rem 0rem;
+}
+.reference{
+    margin:0.5rem;
+    text-align: right;
+    font-size: 0.9rem;
+    color:#555555
+}
+.fullImg{
+    display: flex;
+    justify-content: center;
+    margin: 0.5rem 0rem;
+}
+.fullImg img{
+    width: 90%;
+}
+.rightImg{
+    display: flex;
+    margin-top: 0.3rem;
+}
+.rightImg img{
+    width: 40%;
+    margin-left: 1rem;
+    object-fit: contain;
+}
+.rightImg .contentBoxSubTitle {
+    margin-top: 0px;
+}
+.boxHalf{
+    display: flex;
+    justify-content: flex-end;
+}
+.boxHalf > div{
+    width:48%;
+}
+.boxBottom > div > ul, .boxBottom > ul{
+    margin-top: 0px !important;
+}
+.noteOutLink{
+    width:17rem;
+    border: 1px solid rgb(34, 85, 170);
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    padding:0.7rem 0rem;
+    align-items: center;
+    border-radius: 3px;
+    color:rgb(34, 85, 170);
+    background-color: white;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+.contentBox  ul, .contentBox ol{
+    margin-top: 1rem;
+    margin-left: 2rem;
+    margin-bottom: 0.5rem;
+}
+.contentBox  ul >li,.contentBox  ol >li{
+    margin-top: 0.5rem;
+}
+.info{
+    color:#5f6368;
+    font-size: 0.8rem;
+}
+.contentNote{
+    margin: 1rem 1.5rem 0rem;
+}
+
+.tg {
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin: auto;
+    margin-top: 1rem;
+}
+.tg td {
+    border-color: black;
+    border-style: solid;
+    border-width: 1px;
+    overflow: hidden;
+    padding: 1.5rem 3rem;
+    word-break: normal;
+}
+.tg th {
+    border-color: black;
+    border-style: solid;
+    border-width: 1px;
+    font-weight: normal;
+    overflow: hidden;
+    padding: 1.5rem 3rem;
+    word-break: normal;
+}
+.tg .tg-1wig {
+    font-weight: bold;
+    text-align: center;
+}
+.tg .tg-0lax {
+    text-align: center;
+}
+.wash, .normalTable{
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin: auto;
+    margin-top: 1rem;
+}
+.wash td, .normalTable td{
+    border-color: black;
+    border-style: solid;
+    border-width: 1px;
+}
+.washLeft{
+    background-color: white;
+    width:25%;
+    text-align: center;
+    font-weight: bold;
+    font-size:1.2rem
+}
+.wash h4{
+    margin: 1rem 0.5rem;
+}
+.wash ol, .wash ul{
+    margin: 1rem 2rem 1rem;
+}
+.normalTable td{
+    text-align: center;
+    font-size:1.2rem;
+    padding:0.5rem 0rem;
+    background-color: white;
+}
+.normalTableTop{
+    border-bottom: 3px solid black;
+    font-size: 1.4rem;
+}
+.otherPageLink{
+    border: 1px solid rgb(34, 85, 170);
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    background-color: white;
+    width:80%;
+    margin:auto;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+.otherPageLink img{
+    width:15%;
+}
+.otherPageLink > div{
+    margin-left: 0.5rem;
+}
+.otherPageLink h4{
+    color: rgb(126, 126, 126);
+    font-size: 0.9rem;
+}
+.otherPageLink p{
+    color: black;
+}
+@media screen and (max-width : 1300px) {
+    .banner h1{
+        padding-left: 10rem;
+        font-size: 3.8rem;
+    }
+}
+@media screen and (max-width : 1040px) {
+    .note_box{
+        width:500px;
+    }
+    .banner h1{
+        padding-left: 7rem;
+        font-size: 3.5rem;
+    }
+    .note_top{
+        width: 70%;
+    }
+    .note_top img{
+        right: -1rem;
+        top: -2rem;
+        height: 10rem;
+    }
+    .index, .content, .contentIndex{
+        width: 70%;
+    }
+}
+@media screen and (max-width : 760px) {
+    .halfbox{
+        width: 90%;
+    }
+    .halfboxContainer {
+        justify-content: center;
+    }
+    .rightImg{
+        flex-direction: column;
+        align-items: center;
+    }
+    .rightImg img{
+        width:80%;
+        margin-left: 0px;
+    }
+    .tg td, .tg th{
+        padding:1rem;
+    }
+}
+@media screen and (max-width : 700px) {
+    .note_top img{
+        right: -1rem;
+        top: -1rem;
+        height: 7rem;
+    }
+}
+@media screen and (max-width : 600px) {
+    .note_box > li {
+        width: 150px;
+    }
+    .note_box{
+        width:320px;
+    }
+    .banner h1{
+        padding-left: 3rem;
+        font-size: 3rem;
+    }
+    .note_top{
+        width: 100%;
+        border: 0px;
+        border-top: 2px solid rgb(200, 200, 200);
+        border-bottom: 2px solid rgb(200, 200, 200);
+    }
+    .note_top > div{
+        margin:1rem 2rem;
+    }
+    .index, .content, .contentIndex{
+        width: 100%;
+        border: 0px solid rgb(200, 200, 200);
+    }
+    .contentBox, .contentIndex>div{
+        width:90%;
+        margin: auto;
+    }
+    .indexFirst{
+        margin: auto;
+        width:90%;
+    }
+    .goback{
+        border-bottom: 1px solid rgb(200, 200, 200);
+        border-top: 1px solid rgb(200, 200, 200);
+    }
+    .tg td, .tg th{
+        padding:1rem 0.3rem;
+    }
+}
+@media screen and (max-width : 500px) {
+    
+}
