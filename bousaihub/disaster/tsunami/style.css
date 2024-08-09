@@ -1,0 +1,100 @@
+#earthquakeInfo, #tsunamiTextBox, #tsunamiSetsumei{
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin-left: 2%;
+    margin-top: 0.5rem;
+}
+#tsunamiText{
+    white-space: pre-wrap;
+}
+.tsunamiClassBox{
+    margin:0.3rem 0rem;
+    padding: 0.5rem 0.7rem;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 5px;
+}
+.infoBoxLastKind{
+    font-size: 0.9rem;
+    color:#6e6e6e
+}
+#time{
+    white-space: pre-line;
+}
+.tsunamiForecast > h2{
+    margin-top:1rem;
+    width:fit-content;
+    padding:0.3rem 1rem;
+}
+.tsunamiForecast > div{
+    display: flex;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.261);
+    padding:0.2rem 0;
+    text-align: center;
+    justify-content: space-evenly;
+}
+#majorWarning > h2{
+    background-color: rgb(200,0,255);
+    color:white;
+}
+#warning > h2{
+    background-color: rgb(255,40,0);
+    color:white;
+}
+#advisory > h2{
+    background-color: rgb(250,245,0);
+}
+#watch > h2{
+    background-color: #66ffff;
+}
+#clear > h2{
+    background-color: #6e6e6e;
+    color:white;
+}
+.forecastArea{
+    width: 45%;
+}
+.forecastTime{
+    width: 30%;
+}
+.forecastHeight{
+    width: 15%;
+}
+.tsunamiForecast > div:nth-child(n+3){
+    border-top: 1px solid white;
+}
+#majorWarning, #warning, #advisory, #watch, #clear{
+    display: none;
+}
+#majorWarning .forecastHeight{
+    background-color: rgb(200,0,255);
+    color:white;
+    border-radius: 5px;
+    padding:0.2rem 0;
+}
+#warning .forecastHeight{
+    background-color: rgb(255,40,0);
+    color:white;
+    border-radius: 5px;
+    padding:0.2rem 0;
+}
+#advisory .forecastHeight{
+    background-color: rgb(250,245,0);
+    border-radius: 5px;
+    padding:0.2rem 0;
+}
+#watch .forecastHeight{
+    background-color: #66ffff;
+    border-radius: 5px;
+    padding:0.2rem 0;
+}
+#tsunamiSetsumei h4{
+    margin-top:0.3rem;
+    font-size: 1.1rem;
+}
+#tsunamiSetsumei p{
+    margin-top:-0.2rem;
+    font-size: 0.9rem;
+}

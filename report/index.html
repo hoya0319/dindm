@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ko-kr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DIN-DM</title>
+    <link href="/all.css" rel="stylesheet">
+    <link href="/report/style.css" rel="stylesheet">
+</head>
+<body>
+    <header id="mainHeader"></header>
+    <div id="body">
+        <div id="announce">
+        </div>
+        <div id="tools">
+        </div>
+        <div class="form">
+            <div class="reportMenu">
+                <div id="go_errReport">
+                    <h4>오류 신고・정정 요청</h4>
+                </div>
+                <div id="go_contact">
+                    <h4>문의・의견</h4>
+                </div>
+            </div>
+            <div class="reportMain">
+                <div id="errReport">
+                    <h2>오류 신고・정정 요청</h2>
+                    <form class="contactForm">
+                        <div class="form-group">
+                            <label for="pagelink">페이지 링크</label>
+                            <input type="text" id="pagelink" name="pagelink" rows="1" required></input>
+                            <label for="errMessage">내용</label>
+                            <textarea id="errMessage" name="errMessage" rows="4" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label><input type="checkbox" id="errReplyCheck"> 이메일을 통한 답신을 희망합니다</label>
+                            <div class="err-email-container">
+                                <input type="email" id="err-email" name="email" placeholder="이메일 주소를 입력하세요">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button id="errSubmit" type="submit">전송</button>
+                        </div>
+                    </form>
+                </div>
+                <div id="contact">
+                    <h2>문의・의견</h2>
+                    <form class="contactForm">
+                        <div class="form-group">
+                            <label for="contactMessage">내용</label>
+                            <textarea id="contactMessage" name="contactMessage" rows="4" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label><input type="checkbox" id="conReplyCheck"> 이메일을 통한 답신을 희망합니다</label>
+                            <div class="con-email-container">
+                                <input type="email" id="con-email" name="email" placeholder="이메일 주소를 입력하세요">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button id="contactSubmit" type="submit">전송</button>
+                        </div>
+                    </form>
+                </div>
+                <div id="success">
+                    <div>
+                        <img src="/report/success.svg" alt="성공">
+                        <h4>요청하신 내용이 정상적으로 전송되었습니다!</h4>
+                        <p>빠른 시일 내에 반영하도록 노력하겠습니다.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer id="footer"></footer>
+</body>
+<script type="module" src="/src/announce.js"></script>
+<script src="/src/mainHeaders.js"></script>
+<script src="/src/tools.js"></script>
+<script src="/report/script.js"></script>
+</html>

@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>방재허브_일본 - 아메다스</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="/bousaihub/style.css">
+    <link rel="stylesheet" href="/bousaihub/weather/amedas/style.css">
+    <link href="/all.css" rel="stylesheet">
+</head>
+<body>
+    <header id="mainHeader"></header>
+    <div id="tools">
+    </div>
+    <div class="content">
+        <div class="contentTop">
+            <h2>아메다스</h2>
+        </div>
+        <div class="contentBox">
+            <div class="left">
+                <div id="map"></div>
+                <div class="map_bar">
+                    <div id="legend">
+                        <div class="legend" id="legend_pre10m">
+                            <div>
+                                <img src="./icons/rain8.svg" src="1mm 미만">
+                                <p>~1mm</p>
+                            </div>
+                            <div>
+                                <img src="./icons/rain7.svg" src="3mm 미만">
+                                <p>~3mm</p>
+                            </div>
+                            <div>
+                                <img src="./icons/rain6.svg" src="5mm 미만">
+                                <p>~5mm</p>
+                            </div>
+                            <div>
+                                <img src="./icons/rain5.svg" src="10mm 미만">
+                                <p>~10mm</p>
+                            </div>
+                            <div>
+                                <img src="./icons/rain4.svg" src="15mm 미만">
+                                <p>~15mm</p>
+                            </div>
+                            <div>
+                                <img src="./icons/rain3.svg" src="20mm 미만">
+                                <p>~20mm</p>
+                            </div>
+                            <div>
+                                <img src="./icons/rain2.svg" src="30mm 미만">
+                                <p>~30mm</p>
+                            </div>
+                            <div>
+                                <img src="./icons/rain1.svg" src="30mm 이상">
+                                <p>30mm~</p>
+                            </div>
+                        </div>
+                        <div class="legend" id="legend_pre1h">
+                            <div>
+                                <img src="./icons/rain8.svg" src="1mm 미만">
+                                <p>~1mm</p>
+                            </div>
+                            <div>
+                                <img src="./icons/rain7.svg" src="5mm 미만">
+                                <p>~5mm</p>
+                            </div>
+                            <div>
+                                <img src="./icons/rain6.svg" src="10mm 미만">
+                                <p>~10mm</p>
+                            </div>
+                            <div>
+                                <img src="./icons/rain5.svg" src="20mm 미만">
+                                <p>~20mm</p>
+                            </div>
+                            <div>
+                                <img src="./icons/rain4.svg" src="30mm 미만">
+                                <p>~30mm</p>
+                            </div>
+                            <div>
+                                <img src="./icons/rain3.svg" src="50mm 미만">
+                                <p>~50mm</p>
+                            </div>
+                            <div>
+                                <img src="./icons/rain2.svg" src="80mm 미만">
+                                <p>~80mm</p>
+                            </div>
+                            <div>
+                                <img src="./icons/rain1.svg" src="80mm 이상">
+                                <p>80mm~</p>
+                            </div>
+                        </div>
+                        <div class="legend" id="legend_pre3h">
+                            <div>
+                                <img src="./icons/rain8.svg" src="20mm 미만">
+                                <p>~20mm</p>
+                            </div>
+                            <div>
+                                <img src="./icons/rain7.svg" src="40mm 미만">
+                                <p>~40mm</p>
+                            </div>
+                            <div>
+                                <img src="./icons/rain6.svg" src="60mm 미만">
+                                <p>~60mm</p>
+                            </div>
+                            <div>
+                                <img src="./icons/rain5.svg" src="80mm 미만">
+                                <p>~80mm</p>
+                            </div>
+                            <div>
+                                <img src="./icons/rain4.svg" src="100mm 미만">
+                                <p>~100mm</p>
+                            </div>
+                            <div>
+                                <img src="./icons/rain3.svg" src="120mm 미만">
+                                <p>~120mm</p>
+                            </div>
+                            <div>
+                                <img src="./icons/rain2.svg" src="150mm 미만">
+                                <p>~150mm</p>
+                            </div>
+                            <div>
+                                <img src="./icons/rain1.svg" src="150mm 이상">
+                                <p>150mm~</p>
+                            </div>
+                        </div>
+                        <div class="legend" id="legend_pre24h">
+                            <div>
+                                <img src="./icons/rain8.svg" src="50mm 미만">
+                                <p>~50mm</p>
+                            </div>
+                            <div>
+                                <img src="./icons/rain7.svg" src="80mm 미만">
+                                <p>~80mm</p>
+                            </div>
+                            <div>
+                                <img src="./icons/rain6.svg" src="100mm 미만">
+                                <p>~100mm</p>
+                            </div>
+                            <div>
+                                <img src="./icons/rain5.svg" src="150mm 미만">
+                                <p>~150mm</p>
+                            </div>
+                            <div>
+                                <img src="./icons/rain4.svg" src="200mm 미만">
+                                <p>~200mm</p>
+                            </div>
+                            <div>
+                                <img src="./icons/rain3.svg" src="250mm 미만">
+                                <p>~250mm</p>
+                            </div>
+                            <div>
+                                <img src="./icons/rain2.svg" src="300mm 미만">
+                                <p>~300mm</p>
+                            </div>
+                            <div>
+                                <img src="./icons/rain1.svg" src="300mm 이상">
+                                <p>300mm~</p>
+                            </div>
+                        </div>
+                        <div class="legend" id="legend_temp">
+                            <div>
+                                <img src="./icons/temp10.svg" src="-5°C 미만">
+                                <p>~-5°C</p>
+                            </div>
+                            <div>
+                                <img src="./icons/temp9.svg" src="0°C 미만">
+                                <p>~0°C</p>
+                            </div>
+                            <div>
+                                <img src="./icons/temp8.svg" src="5°C 미만">
+                                <p>~5°C</p>
+                            </div>
+                            <div>
+                                <img src="./icons/temp7.svg" src="10°C 미만">
+                                <p>~10°C</p>
+                            </div>
+                            <div>
+                                <img src="./icons/temp6.svg" src="15°C 미만">
+                                <p>~15°C</p>
+                            </div>
+                            <div>
+                                <img src="./icons/temp5.svg" src="20°C 미만">
+                                <p>~20°C</p>
+                            </div>
+                            <div>
+                                <img src="./icons/temp4.svg" src="25°C 미만">
+                                <p>~25°C</p>
+                            </div>
+                            <div>
+                                <img src="./icons/temp3.svg" src="30°C 미만">
+                                <p>~30°C</p>
+                            </div>
+                            <div>
+                                <img src="./icons/temp2.svg" src="35°C 미만">
+                                <p>~35°C</p>
+                            </div>
+                            <div>
+                                <img src="./icons/temp1.svg" src="35°C 이상">
+                                <p>35°C~</p>
+                            </div>
+                        </div>
+                        <div class="legend" id="legend_wind">
+                            <div>
+                                <img src="./icons/wind8.png" src="1m/s 미만">
+                                <p>~1m/s</p>
+                            </div>
+                            <div>
+                                <img src="./icons/wind7.png" src="3m/s 미만">
+                                <p>~3m/s</p>
+                            </div>
+                            <div>
+                                <img src="./icons/wind6.png" src="5m/s 미만">
+                                <p>~5m/s</p>
+                            </div>
+                            <div>
+                                <img src="./icons/wind5.png" src="10m/s 미만">
+                                <p>~10m/s</p>
+                            </div>
+                            <div>
+                                <img src="./icons/wind4.png" src="15m/s 미만">
+                                <p>~15m/s</p>
+                            </div>
+                            <div>
+                                <img src="./icons/wind3.png" src="20m/s 미만">
+                                <p>~20m/s</p>
+                            </div>
+                            <div>
+                                <img src="./icons/wind2.png" src="25m/s 미만">
+                                <p>~25m/s</p>
+                            </div>
+                            <div>
+                                <img src="./icons/wind1.png" src="25m/s 이상">
+                                <p>25m/s~</p>
+                            </div>
+                        </div>
+                        <div class="legend" id="legend_humid">
+                            <div>
+                                <img src="./icons/hum11.svg" src="10% 미만">
+                                <p>~10%</p>
+                            </div>
+                            <div>
+                                <img src="./icons/hum10.svg" src="20% 미만">
+                                <p>~20%</p>
+                            </div>
+                            <div>
+                                <img src="./icons/hum9.svg" src="30% 미만">
+                                <p>~30%</p>
+                            </div>
+                            <div>
+                                <img src="./icons/hum8.svg" src="40% 미만">
+                                <p>~40%</p>
+                            </div>
+                            <div>
+                                <img src="./icons/hum7.svg" src="50% 미만">
+                                <p>~50%</p>
+                            </div>
+                            <div>
+                                <img src="./icons/hum6.svg" src="60% 미만">
+                                <p>~60%</p>
+                            </div>
+                            <div>
+                                <img src="./icons/hum5.svg" src="70% 미만">
+                                <p>~70%</p>
+                            </div>
+                            <div>
+                                <img src="./icons/hum4.svg" src="80% 미만">
+                                <p>~80%</p>
+                            </div>
+                            <div>
+                                <img src="./icons/hum3.svg" src="90% 미만">
+                                <p>~90%</p>
+                            </div>
+                            <div>
+                                <img src="./icons/hum2.svg" src="100% 미만">
+                                <p>~100%</p>
+                            </div>
+                            <div>
+                                <img src="./icons/hum1.svg" src="100%">
+                                <p>100%</p>
+                            </div>
+                        </div>
+                        <div class="legend" id="legend_sun1h">
+                            <div>
+                                <img src="./icons/station.svg" src="0시간">
+                                <p>0시간</p>
+                            </div>
+                            <div>
+                                <img src="./icons/rain5.svg" src="0.2시간 미만">
+                                <p>~0.2시간</p>
+                            </div>
+                            <div>
+                                <img src="./icons/rain6.svg" src="0.4시간 미만">
+                                <p>~0.4시간</p>
+                            </div>
+                            <div>
+                                <img src="./icons/rain4.svg" src="0.6시간 미만">
+                                <p>~0.6시간</p>
+                            </div>
+                            <div>
+                                <img src="./icons/rain3.svg" src="0.8시간 미만">
+                                <p>~0.8시간</p>
+                            </div>
+                            <div>
+                                <img src="./icons/rain2.svg" src="1시간 미만">
+                                <p>~1시간</p>
+                            </div>
+                            <div>
+                                <img src="./icons/rain1.svg" src="1시간">
+                                <p>1시간</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="button-container">
+                        <p class="amedas_button" id="precipitation10m-button">10분 강수량</p>
+                        <p class="amedas_button" id="precipitation1h-button">1시간 강수량</p>
+                        <p class="amedas_button" id="precipitation3h-button">3시간 강수량</p>
+                        <p class="amedas_button" id="precipitation24h-button">24시간 강수량</p>
+                        <p class="amedas_button" id="temp-button">현재 기온</p>
+                        <p class="amedas_button" id="wind-button">현재 바람</p>
+                        <p class="amedas_button" id="humid-button">현재 습도</p>
+                        <p class="amedas_button" id="sun1h-button">일조 시간</p>
+                        <p class="amedas_button" id="snow1h-button">1시간 강설량</p>
+                        <p class="amedas_button" id="snow6h-button">6시간 강설량</p>
+                        <p class="amedas_button" id="snow24h-button">24시간 강설량</p>
+                    </div>
+                </div>
+            </div>
+            <div class="right">
+                <p id="time"></p>
+                <div id="info">
+                    <h2 id="stationName">관측점을 선택해주세요.</h2>
+                    <span id="stationNameJP" class="jp"></span>
+                    <p id="warn_date"></p>
+                    <div id="warn_info"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script src="/bousaihub/weather/amedas/script.js"></script>
+<script src="/src/mainHeaders.js"></script>
+<script src="/src/tools.js"></script>
+</html>

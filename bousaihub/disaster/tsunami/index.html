@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>방재허브_일본 - 해일정보</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="/bousaihub/style.css">
+    <link rel="stylesheet" href="/bousaihub/disaster/tsunami/style.css">
+    <link href="/all.css" rel="stylesheet">
+</head>
+<body>
+    <header id="mainHeader"></header>
+    <div id="tools">
+    </div>
+    <div class="content">
+        <!-- <div id="announce">
+        </div> -->
+        <div class="contentTop">
+            <h2>해일정보</h2>
+        </div>
+        <div class="contentBox">
+            <div class="left">
+                <div id="map"></div>
+                <div class="map_bar">
+                    <div id="legend">
+                    </div>
+                </div>
+                <div class="tsunamiForecastBox">
+                    <div class="tsunamiForecast" id="majorWarning">
+                        <h2>대해일경보</h2>
+                    </div>
+                    <div class="tsunamiForecast" id="warning">
+                        <h2>해일경보</h2>
+                    </div>
+                    <div class="tsunamiForecast" id="advisory">
+                        <h2>해일주의보</h2>
+                    </div>
+                    <div class="tsunamiForecast" id="watch">
+                        <h2>해일예보</h2>
+                    </div>
+                    <div class="tsunamiForecast" id="clear">
+                        <h2>해제</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="right">
+                <p id="time"></p>
+                <h3 id="headline"></h3>
+                <div id="info">
+                    <h2 id="stationName">해일 예보구를 선택해주세요.</h2>
+                </div>
+                <div id="earthquakeInfo">
+                    
+                </div>
+                <div id="tsunamiTextBox">
+                    <p id="tsunamiText"></p>
+                </div>
+                <div id="tsunamiSetsumei">
+                    <h3>예상되는 해일의 높이의 설명</h3>
+                    <p>예상되는 해일이 높을수록, 더 큰 피해가 발생합니다.</p>
+                    <h4>10m 초과</h4>
+                    <p>거대한 해일이 덮쳐 궤멸적인 피해가 생깁니다. 목조 가옥이 무너지며 유실되고, 사람은 해일에 떠내려갑니다.</p>
+                    <h4>10m</h4>
+                    <p>거대한 해일이 덮쳐 큰 피해가 생깁니다. 목조 가옥이 무너지며 유실되고, 사람은 해일에 떠내려갑니다.</p>
+                    <h4>5m</h4>
+                    <p>해일이 덮쳐 큰 피해가 생깁니다. 목조 가옥이 무너지며 유실되고, 사람은 해일에 떠내려갑니다.</p>
+                    <h4>3m</h4>
+                    <p>해발 고도가 낮은 곳에서는 해일이 덮쳐 피해가 생깁니다. 목조 가옥에서 침수 피해가 발생하고, 사람은 해일에 떠내려갑니다.</p>
+                    <h4>1m</h4>
+                    <p>바다 속에서 사람은 빠른 물살에 휘말립니다. 양식 뗏목이 유실되고 소형 선박이 전복됩니다.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script type="module" src="/bousaihub/disaster/tsunami/script.js"></script>
+<script src="/src/mainHeaders.js"></script>
+<script src="/src/tools.js"></script>
+<!-- <script type="module" src="/src/announce.js"></script> -->
+</html>

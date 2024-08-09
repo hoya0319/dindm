@@ -1,0 +1,40 @@
+.content{
+    width:50rem;
+    margin: auto;
+    background-color: white;
+    padding:1rem 2rem;
+}
+body{
+    background-color: #e8e8e8;
+}
+.content_title{
+    font-size: 1.8rem;
+    font-family: 'NanumSquareNeoExtraBold';
+    border-bottom: 4px solid #acacac;
+    position: relative;
+    padding-bottom: 0.3125rem;
+}
+.content_title::before{
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    width: 20%;
+    border-bottom: 4px solid #ffc131;
+}
+.content_subTitle{
+    position: relative;
+    padding-bottom: 0.3125rem;
+    border-bottom: 1px solid #acacac;
+    margin: 2rem 0 1rem 0;
+    font-size: 1.25rem;
+    font-size: 1.6rem;
+}
+.content_subTitle::before{
+    content: "";
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 4rem;
+    height: 6px;
+    background: #ffc131;
+}

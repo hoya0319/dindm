@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>방재허브_한국 - 기상특보</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="/bangjaehub/weather/weatherwarning/style.css">
+    <link href="/all.css" rel="stylesheet">
+</head>
+<body>
+    <header id="mainHeader"></header>
+    <div id="tools">
+    </div>
+    <div class="content">
+        <div class="contentTop">
+            <h2>기상특보</h2>
+        </div>
+        <div class="contentBox">
+            <div class="left">
+                <div id="map"></div>
+                <div class="map_bar">
+                    <div class="legend">
+                        <div>
+                            <img src="./icons/warning.svg" src="기상경보">
+                            <p>기상경보</p>
+                        </div>
+                        <div>
+                            <img src="./icons/advise.svg" src="기상주의보">
+                            <p>기상주의보</p>
+                        </div>
+                        <div>
+                            <img src="./icons/early.svg" src="예비특보">
+                            <p>예비특보</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="right">
+                <div id="info">
+                    <h2 id="warn_area">지역 정보</h2>
+                    <p id="warn_date">지역을 선택하세요.</p>
+                    <div id="warn_info"></div>
+                </div>
+                <div id="textbox"></div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script src="/bangjaehub/weather/weatherwarning/script.js"></script>
+<script src="/src/mainHeaders.js"></script>
+<script src="/src/tools.js"></script>
+</html>
