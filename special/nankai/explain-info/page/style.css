@@ -2,8 +2,11 @@
     width:50rem;
     margin: auto;
     background-color: white;
-    padding:1rem 2rem;
+    padding:1rem 0 0;
     margin-top: 1rem;
+}
+.content > div{
+    margin: 0rem 2rem;
 }
 body{
     background-color: #e8e8e8;
@@ -38,4 +41,38 @@ body{
     width: 4rem;
     height: 6px;
     background: #ffc131;
+}
+.info{
+    font-size: 0.87rem;
+    color:#898989
+}
+.buttons {
+    display: flex;
+}
+.goback {
+    width: 100%;
+    border: 2px solid #e8e8e8;
+    color: black;
+    text-align: center;
+    font-size: 1.1rem;
+    padding: 0.5rem 0rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin:1rem;
+}
+.goback:hover{
+    background-color: #e8e8e8;
+}
+.goback img {
+    height: 1.1rem;
+}
+@media screen and (max-width : 930px) {
+    .content{
+        width:100%;
+        padding:1rem 0rem;
+    }
+    .content > div{
+        margin:0rem 1rem;
+    }
 }

@@ -8,7 +8,7 @@
 html, body{
     margin:0px;
     padding:0px;
-    font-family: 'Pretendard-Regular', sans-serif;
+    font-family: 'Pretendard-Regular', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
     width:100vw;
     overflow-x: hidden;
     line-height: 1.3;
@@ -140,6 +140,7 @@ a{
     right: 3rem;
     bottom:3rem;
     flex-direction: column-reverse;
+    z-index: 99999;
 }
 .tool{
     border-radius:50%;

@@ -207,6 +207,20 @@
         font-size: 3.5rem;
     }
 }
+@media screen and (max-width : 850px) {
+    .content{
+        width:95%;
+        margin: auto;
+    }
+    .crew, .ask{
+        height: auto;
+        padding: 0 0 5.5rem;
+    }
+    .crew_link, .ask_link{
+        padding: 10px 20px;
+        font-size: 2rem;
+    }
+}
 @media screen and (max-width : 600px) {
     .banner h1{
         padding-left: 3rem;
