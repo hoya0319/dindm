@@ -1,0 +1,10 @@
+.info_time{
+    color:#5f6368;
+    font-size: 1rem;
+}
+p{
+    white-space: pre-line;
+}
+.legend{
+    border-bottom:none;
+}

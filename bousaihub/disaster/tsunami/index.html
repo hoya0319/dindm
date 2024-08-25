@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <link rel="stylesheet" href="/bousaihub/style.css">
+    <link rel="stylesheet" href="/bousaihub/disaster/style.css">
     <link rel="stylesheet" href="/bousaihub/disaster/tsunami/style.css">
     <link href="/all.css" rel="stylesheet">
 </head>
@@ -24,9 +25,40 @@
                 <div id="map"></div>
                 <div class="map_bar">
                     <div id="legend">
+                        <div class="legend" style="display: flex;">
+                            <div>
+                                <img src="./icons/majorwarning.svg">
+                                <p>대해일경보</p>
+                            </div>
+                            <div>
+                                <img src="./icons/warning.svg">
+                                <p>해일경보</p>
+                            </div>
+                            <div>
+                                <img src="./icons/advisory.svg">
+                                <p>해일주의보</p>
+                            </div>
+                            <div>
+                                <img src="./icons/watch.svg">
+                                <p>해일예보</p>
+                            </div>
+                            <div>
+                                <img src="./icons/clear.svg">
+                                <p>해제</p>
+                            </div>
+                        </div>
+                        <div class="button-container">
+                            <a href="#" data-target="tsunamiForecastBox" class="tsunamiButton link_box">해일 예상 정보</a>
+                            <a href="#" data-target="tsunamiObservationBox" class="tsunamiButton link_box">해일 관측 정보</a>
+                        </div>
                     </div>
                 </div>
-                <div class="tsunamiForecastBox">
+                <div id="tsunamiObservationBox">
+                    <div class="tsunamiForecast" id="observed">
+                        <h2>관측된 해일</h2>
+                    </div>
+                </div>
+                <div class="tsunamiForecastBox" id="tsunamiForecastBox">
                     <div class="tsunamiForecast" id="majorWarning">
                         <h2>대해일경보</h2>
                     </div>
@@ -78,5 +110,6 @@
 <script type="module" src="/bousaihub/disaster/tsunami/script.js"></script>
 <script src="/src/mainHeaders.js"></script>
 <script src="/src/tools.js"></script>
+<script src="/src/pagelink.js"></script>
 <!-- <script type="module" src="/src/announce.js"></script> -->
 </html>

@@ -298,11 +298,12 @@ function getWindIcon(type, value, dir){
 }
 var weatherData, locations
 var markers = []
-function getData(){
-    fetch('http://localhost:3000/jp_amedas')
+async function getData(){
+    await fetch('http://localhost:3000/jp_amedas')
         .then(response => response.json())
         .then(data => {
             weatherData = data;
+            getStation();
         })
         .catch(error => console.error('Error fetching weather data:', error));
     
@@ -328,6 +329,7 @@ function updateMarkers(dataType) {
     // 지도에서 기존 마커 제거
     markers.forEach(marker => map.removeLayer(marker));
     markers = [];
+    console.log(weatherData)
     document.getElementById('time').textContent = `${weatherData[0].slice(4,6)}월 ${weatherData[0].slice(6,8)}일 ${weatherData[0].slice(8,10)}시 ${weatherData[0].slice(10,12)}분 현재`
     for (var key in locations) {
         if (locations.hasOwnProperty(key)) {
@@ -517,4 +519,3 @@ items.forEach((item)=>{
     })
 })
 getData();
-getStation();

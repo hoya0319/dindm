@@ -1,0 +1,36 @@
+.map_bar{
+    margin-top: 1rem;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+.legend{
+    display: flex;
+    justify-content: space-around;
+    border-bottom: 1px solid black;
+}
+.legend img{
+    width:1.5rem;
+    margin-top: 4px;
+}
+.legend div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.legend p {
+    font-size: 0.8rem;
+    color:#6e6e6e
+}
+@media screen and (max-width : 1150px) {
+    .contentBox {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+    .left, .right{
+        width:95%;
+        margin: auto;
+    }
+    #info, #headline, #earthquakeInfo, #tsunamiTextBox, #tsunamiSetsumei {
+        margin-left: 0px !important;
+    }
+}

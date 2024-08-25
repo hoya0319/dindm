@@ -56,9 +56,9 @@ function getTsunamiPara(){
 function getStyle(kind) {
     switch(kind) {
         case '대해일경보':
-            return { color: 'rgb(200,0,255)', weight: 8 };
+            return { color: 'rgb(200,0,255)', weight: 10};
         case '대해일경보 : 발표':
-            return { color: 'rgb(200,0,255)', weight: 8 };
+            return { color: 'rgb(200,0,255)', weight: 10 };
         case '해일경보':
             return { color: 'rgb(255,40,0)', weight: 5 };
         case '해일주의보':
@@ -104,6 +104,20 @@ function getClassStyle(type){
         return 'border: 1px solid #66ffff; background-color: #66ffff;'
     }else if(type == '해일주의보 해제'){
         return 'border: 1px solid #6e6e6e; background-color: #6e6e6e; color:white;'
+    }
+}
+function getObStyle(val){
+    val = val.slice(0,-1)
+    if(val < 0.2){
+        return 'background-color: rgb(0, 255, 255);'
+    }else if(val < 1){
+        return 'background-color: rgb(255, 238, 0);'
+    }else if(val < 3){
+        return 'background-color: rgb(217, 29, 0); color:white;'
+    }else if(val >= 3){
+        return 'background-color: rgb(191, 0, 255); color:white;'
+    }else{
+        return 'gray'
     }
 }
 function draw(){
@@ -276,6 +290,57 @@ function draw(){
         divBox.appendChild(height);
 
         container.appendChild(divBox)
+    })
+    var observation = tsunamiData.body.tsunami.observation;
+    if(observation.length == 0){
+        document.getElementById('observed').style.display = 'none';
+    }else{
+        document.getElementById('observed').style.display = 'block';
+    }
+
+    observation.forEach(data => {
+        console.log(data)
+        var container = document.getElementById('observed')
+        for(var i = 0; i < (data.stations).length; i++){
+            var observationData = data.stations[i];
+            var box = document.createElement('div')
+
+            var areaBox = document.createElement('div');
+            areaBox.className = 'observationArea';
+
+            var areaName = document.createElement('h4');
+            areaName.textContent = observationData.name;
+            areaBox.appendChild(areaName);
+
+            if(observationData.maxHeight.height.condition != ''){
+                var condition = document.createElement('span');
+                condition.className = 'observationCondition';
+                condition.textContent = observationData.maxHeight.height.condition;
+                areaBox.appendChild(condition)
+            }
+            if(observationData.maxHeight.height.revise != ''){
+                var revise = document.createElement('span');
+                revise.className = 'observationRevise';
+                revise.textContent = observationData.maxHeight.height.revise;
+                areaBox.appendChild(revise)
+            }
+
+            box.appendChild(areaBox)
+
+            var time = document.createElement('h4')
+            time.className = 'forecastTime';
+            time.textContent = (mon_day(observationData.maxHeight.dateTime).slice(4,))
+            box.appendChild(time)
+
+            var height = document.createElement('h4')
+            height.className = 'observedHeight';
+            height.textContent = observationData.maxHeight.height.height;
+            height.style = `${getObStyle(observationData.maxHeight.height.height)}`
+            box.appendChild(height)
+
+            container.appendChild(box)
+        }
+
     })
 }
 function getObColor(val){

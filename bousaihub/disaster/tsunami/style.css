@@ -53,6 +53,10 @@
     background-color: #6e6e6e;
     color:white;
 }
+#observed > h2{
+    background-color: #00900c;
+    color:white;
+}
 .forecastArea{
     width: 45%;
 }
@@ -65,7 +69,7 @@
 .tsunamiForecast > div:nth-child(n+3){
     border-top: 1px solid white;
 }
-#majorWarning, #warning, #advisory, #watch, #clear{
+#majorWarning, #warning, #advisory, #watch, #clear, #observed{
     display: none;
 }
 #majorWarning .forecastHeight{
@@ -97,4 +101,44 @@
 #tsunamiSetsumei p{
     margin-top:-0.2rem;
     font-size: 0.9rem;
+}
+.observedHeight{
+    border-radius: 5px;
+    padding:0.2rem 0;
+    width: 15%;
+}
+.observationArea{
+    width: 45%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.observationCondition{
+    margin-left: 0.3rem;
+    background-color: red;
+    color:white;
+    padding: 3px 7px;
+    border-radius: 5px;
+}
+.observationRevise{
+    margin-left: 0.3rem;
+    border:1px solid red;
+    color: red;
+    padding: 3px 7px;
+    border-radius: 5px;
+}
+.button-container{
+    display: flex;
+}
+.tsunamiButton{
+    width:50%;
+    text-align: center;
+    padding:0.3rem 0;
+    color:black;
+}
+.tsunamiButton:hover{
+    cursor: pointer;
+}
+.tsunamiButton:nth-child(n+2){
+    border-left: 1px solid black;
 }

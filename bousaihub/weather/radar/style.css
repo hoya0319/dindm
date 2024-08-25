@@ -1,0 +1,39 @@
+#map {
+    height: 100vw;
+    width: 100vw;
+    margin-top: 48px;
+}
+#slider-container{
+    position: fixed;
+    right: 1rem;
+    top:4rem;
+    z-index: 9999;
+    background-color: rgba(0,0,0,0.6);
+    width:12rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding:0.6rem;
+    border-radius: 5px;
+}
+#time-display{
+    color:white;
+}
+#time-slider{
+    width:10rem;
+}
+#layer-box{
+    position: fixed;
+    top:9rem;
+    right: 1rem;
+    z-index: 9999;
+}
+#layer-box img{
+    width:2.5rem;
+    background-color: white;
+    border-radius: 50%;
+    padding:5px;
+}
+#layer-box img:hover{
+    cursor: pointer;
+}

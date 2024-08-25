@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>방재허브_일본 - 태풍</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="/bousaihub/disaster/typhoon/style.css">
+    <link href="/all.css" rel="stylesheet">
+</head>
+
+<body>
+    <header id="mainHeader"></header>
+    <div id="tools">
+    </div>
+    <div id="map">
+
+    </div>
+    <p id="spe">상세보기</p>
+    <p id="rain">고해상도 나우캐스트</p>
+    <div class="button-container" id="buttonContainer"></div>
+    <h1 id="noTyp">현재 태풍정보는 발표되어 있지 않습니다.</h1>
+    <div class="infoBox" id="infoBox">
+        <div id="name">
+            <h4 id="typNum"></h4>
+            <h1 id="typName"></h1>
+            <p id="reportTime"></p>
+        </div>
+        <div class="typ_now">
+            <h4 class="now_class" id="now_class"></h4>
+            <p class="now_time" id="now_time"></p>
+            <p id="remark"></p>
+            <div id="typ_prop">
+                <span id="now_size"></span>
+                <span id="now_strength"></span>
+            </div>
+            <div class="typ_now_box">
+                <div>
+                    <p>중심기압</p> <span id="center_hpa"></span>
+                    <p>hPa</p>
+                </div>
+                <div>
+                    <p>최대풍속</p> <span id="center_max_wind_speed"></span>
+                    <p>m/s</p>
+                </div>
+            </div>
+            <div class="under">
+                <div class="under_box">
+                    <p>중심위치 정확도</p>
+                    <h4 id="acc"></h4>
+                </div>
+                <div class="under_box">
+                    <p>최대순간풍속</p>
+                    <div>
+                        <h4 id="center_max_shun_wind_speed"></h4>
+                    </div>
+                </div>
+                <div class="under_box">
+                    <p>이동방향</p>
+                    <h4 id="mov_dir"></h4>
+                </div>
+                <div class="under_box">
+                    <p>이동속도</p>
+                    <div>
+                        <h4 id="mov_spd"></h4>
+                        <p id="mov_tan">&nbsp;km/h</p>
+                    </div>
+                </div>
+                <div class="under_box">
+                    <p>강풍역</p>
+                    <h4 id="strong_area"></h4>
+                </div>
+                <div class="under_box">
+                    <p>폭풍역</p>
+                    <h4 id="storm_area"></h4>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script src="/src/mainHeaders.js"></script>
+<script src="/src/tools.js"></script>
+<script type="module" src="/bousaihub/disaster/typhoon/script.js"></script>
+
+</html>

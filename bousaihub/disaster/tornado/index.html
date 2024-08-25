@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>방재허브_일본 - 토네이도주의정보</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="/bousaihub/style.css">
+    <link rel="stylesheet" href="/bousaihub/disaster/style.css">
+    <link rel="stylesheet" href="/bousaihub/disaster/tornado/style.css">
+    <link href="/all.css" rel="stylesheet">
+</head>
+<body>
+    <header id="mainHeader"></header>
+    <div id="tools">
+    </div>
+    <div class="content">
+        <!-- <div id="announce">
+        </div> -->
+        <div class="contentTop">
+            <h2>토네이도주의정보</h2>
+        </div>
+        <div class="contentBox">
+            <div class="left">
+                <div id="map"></div>
+                <div class="map_bar">
+                    <div id="legend">
+                        <div class="legend" style="display: flex;">
+                            <div>
+                                <img src="./icon/occur.svg">
+                                <p>토네이도발생추정</p>
+                            </div>
+                            <div>
+                                <img src="./icon/info.svg">
+                                <p>토네이도주의정보</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="right">
+                <div id="info">
+                    <h2 id="stationName">지역을 선택해주세요.</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script type="module" src="/bousaihub/disaster/tornado/script.js"></script>
+<script src="/src/mainHeaders.js"></script>
+<script src="/src/tools.js"></script>
+<!-- <script type="module" src="/src/announce.js"></script> -->
+</html>

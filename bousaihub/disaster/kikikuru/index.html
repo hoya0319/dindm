@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>방재허브_일본 - 키키쿠루</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="/bousaihub/disaster/kikikuru/style.css">
+    <link href="/all.css" rel="stylesheet">
+</head>
+
+<body>
+    <header id="mainHeader"></header>
+    <div id="tools">
+    </div>
+    <h3 id="time"></h3>
+    <select id="kikikuru">
+        <option id="landslide">토사</option>
+        <option id="inund">침수</option>
+        <option id="flood">홍수</option>
+    </select>
+    <div id="map">
+
+    </div>
+    <div class="legend">
+        <div>
+            <div class="legend_color" style="background-color: rgb(12, 0, 12);"></div>
+            <p>재해절박</p>
+        </div>
+        <div>
+            <div class="legend_color" style="background-color: rgb(170, 0, 170);"></div>
+            <p>위험</p>
+        </div>
+        <div>
+            <div class="legend_color" style="background-color: rgb(255, 40, 170);"></div>
+            <p>경계</p>
+        </div>
+        <div>
+            <div class="legend_color" style="background-color: rgb(242, 231, 0);"></div>
+            <p>주의</p>
+        </div>
+        <div>
+            <div class="legend_color" style="background-color: rgb(255, 255, 255);"></div>
+            <p>이후의 정보에 주의</p>
+        </div>
+    </div>
+</body>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script src="/src/mainHeaders.js"></script>
+<script src="/src/tools.js"></script>
+<script type="module" src="/bousaihub/disaster/kikikuru/script.js"></script>
+
+</html>

@@ -1,0 +1,53 @@
+#map {
+    height: 100vw;
+    width: 100vw;
+    margin-top: 48px;
+}
+#time{
+    position: fixed;
+    top:4rem;
+    z-index: 9999;
+    right: 1rem;
+    background-color: #2f2f2f;
+    color:white;
+    padding:1rem;
+    border-radius: 10px;
+}
+#kikikuru{
+    position: fixed;
+    top:8rem;
+    z-index: 9999;
+    right: 1rem;
+}
+select {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    font-family: "Pretendard-Regular", sans-serif;
+    font-size: 1rem;
+    padding:0.6rem 2rem 0.6rem 0.6rem;
+    background:url('drop.svg') no-repeat 97% 50%/15px auto;
+    background-color: white;
+    border-radius: 5px;
+}
+.legend{
+    position: fixed;
+    bottom:1rem;
+    left:1rem;
+    z-index: 9999;
+    background-color: white;
+    padding:0.5rem 1rem;
+    border-radius: 10px;
+}
+.legend_color{
+    width:2rem;
+    height: 1rem;
+    border:1px solid black;
+}
+.legend > div{
+    display: flex;
+    align-items: center;
+}
+.legend p{
+    margin-left: 0.3rem;
+}
