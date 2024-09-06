@@ -10,6 +10,7 @@
 .section_table_content p{
     width:9rem;
     color:#898989;
+    font-family: 'Noto Sans JP';
 }
 .section_table_content a{
     margin-left: 0.5rem;
