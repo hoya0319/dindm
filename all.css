@@ -10,15 +10,12 @@
 html, body{
     margin:0px;
     padding:0px;
-    font-family: 'Pretendard-Regular', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    font-family: -apple-system, 'Pretendard-Regular', BlinkMacSystemFont, system-ui, sans-serif;
     width:100vw;
     overflow-x: hidden;
     line-height: 1.3;
     word-break: keep-all;
     color: #111111;
-}
-p, a, h1, h2, h3, h4, h5, h6 {
-    transform: skew(-0.1deg);
 }
 body > div{
     max-width: 100vw;
