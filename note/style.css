@@ -137,7 +137,6 @@ ul, li, ol{
 .indexContent a > img{
     height:1.1rem;
     margin-left: 1rem;
-    margin-bottom: 2px;
 }
 .indexTitle{
     display: flex;
@@ -168,7 +167,6 @@ ul, li, ol{
     font-size:1.2rem;
     padding:0.3rem 0.5rem;
     border-radius: 5px;
-    width: 34px;
 }
 .contentIndex ul li{
     list-style: none;
@@ -335,6 +333,9 @@ ul, li, ol{
 .contentNote{
     margin: 1rem 1.5rem 0rem;
 }
+.link_box{
+    color:#0000EE
+}
 
 .tg {
     border-collapse: collapse;
@@ -429,6 +430,30 @@ ul, li, ol{
 .otherPageLink p{
     color: black;
 }
+.notice{
+    width:800px;
+    margin: auto;
+    margin-top: 5rem;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    padding:5px;
+    color:#666666;
+}
+.notice > h4{
+    text-align: center;
+    border-bottom: 1px solid #ccc;
+}
+.notice > div > h4{
+    margin-top: 5px;
+    font-size: 1rem;
+}
+.notice > div > p{
+    font-size: 0.87rem;
+    padding: 0;
+}
+.notice .jp{
+    font-size: 0.85rem;
+}
 @media screen and (max-width : 1300px) {
     .banner h1{
         padding-left: 10rem;
@@ -453,6 +478,9 @@ ul, li, ol{
     }
     .index, .content, .contentIndex{
         width: 70%;
+    }
+    .notice{
+        width:80%;
     }
 }
 @media screen and (max-width : 760px) {
@@ -520,7 +548,30 @@ ul, li, ol{
     .tg td, .tg th{
         padding:1rem 0.3rem;
     }
-}
-@media screen and (max-width : 500px) {
     
+    .indexContent a{
+        font-size:.95rem;
+        display: flex;
+        align-items: center;
+        color:#5f6368;
+    }
+    .indexContent a > img{
+        height:.85rem;
+        margin-left: 1rem;
+    }
+    .headerLogoTitle {
+        color: white;
+        font-size: 1.4rem;
+    }
+    #headers {
+        height: 3rem;
+    }
+    .contentTitle h1 {
+        font-size: 1.6rem;
+    }
+    .contentTitle a {
+        font-size: 1rem;
+        padding: 0.3rem 0.5rem;
+        border-radius: 5px;
+    }
 }
