@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko-kr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DRS - 재해보고시스템</title>
+    <link href="/all.css" rel="stylesheet">
+    <link rel="icon" type="image/png" href="/favicon.ico"/>
+    <link href="/drs/convey/style.css" rel="stylesheet">
+</head>
+<body>
+    <header id="mainHeader"></header>
+    <div id="body">
+        <div id="tools">
+        </div>
+        <div class="main">
+            <h2 class="top">재난 체감 설문조사</h2>
+            <div class="bottom">
+                <h4 id="question"></h4>
+                <div class="answer_sheet">
+                    <p id="red" style="background-color: white; color: black;"></p>
+                    <p id="orange" style="background-color: white; color: black;"></p>
+                    <p id="yellow" style="background-color: white; color: black;"></p>
+                    <p id="green" style="background-color: white; color: black;"></p>
+                    <p id="blue" style="background-color: white; color: black;"></p>
+                    <p id="gray" style="background-color: white; color: black;"></p>
+                </div>
+                <p style="margin-top:1rem;">현재 위치: <span id="now_position"></span></p>
+                <p id="get_position">위치정보 수집</p>
+                <p id="caution" class="info">수집된 위치정보는 'DRS' 페이지 상에 표시됩니다. 그 외의 다른 목적으로는 일절 사용되지 않습니다. 위치정보 외에 사용자를 특정할 수 있는 어떠한 정보도 수집하지 않습니다. 보고를 위한 위치정보만 수집합니다.<br>위 버튼을 누르면 위치정보 수집에 동의한 것으로 간주됩니다.</p>
+                <p id="submit">제출</p>
+            </div>
+        </div>
+    </div>
+    <footer id="footer"></footer>
+</body>
+<script src="/src/mainHeaders.js"></script>
+<script src="/src/tools.js"></script>
+<script src="/drs/convey/script.js"></script>
+</html>

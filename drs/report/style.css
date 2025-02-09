@@ -1,0 +1,155 @@
+html, #body{
+    background-color: rgb(6,6,6);
+    margin-bottom: 0;
+    color:white;
+}
+#check, #box{
+    width:30rem;
+    /* margin: auto; */
+    margin-top: 2rem;
+}
+#body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#box{
+    display: none;
+}
+.check_btn_box{
+    display: flex;
+    align-items: center;
+    margin-top: 1rem;
+}
+.check_btn{
+    width:5rem;
+    text-align: center;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    padding: 5px 0;
+    font-weight: 500;
+    margin-right: 0.5rem;
+}
+#now_safe{
+    color:black;
+    background-color: rgb(6, 175, 205);
+    border: 1px solid rgb(6, 175, 205);
+}
+#now_safe:hover{
+    cursor: pointer;
+    background-color: rgba(6, 175, 205,0.7);
+}
+#now_no_safe{
+    color:#ccc;
+    border: 1px solid #ccc;
+}
+#now_no_safe:hover{
+    background-color:#cccccc1e;
+    border: 1px solid #ccc;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+.form-group label {
+    display: block;
+    margin: 5px 0px;
+}
+.form-group input, .form-group textarea{
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-family: 'Pretendard Variable';
+    min-width: 100%;
+    max-width: 100%;
+}
+label{
+    font-size: 1.2rem;
+}
+textarea{
+    min-height: 5rem;
+}
+.disaster{
+    border:1px solid #ccc;
+    color:#ccc;
+    padding:0.3rem 1rem;
+    margin-top: 0.3rem;
+    border-radius: 5px;
+    width:40%;
+}
+.disaster:hover{
+    cursor: pointer;
+}
+.clicked{
+    /* background-color: #333333; */
+    background-color: rgb(6, 175, 205);
+    color:black
+}
+#map {
+    height: 400px;
+    width: 100%;
+    position: relative;
+}
+.disaster-box{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.situation{
+    border:1px solid #ccc;
+    color:#ccc;
+    padding:0.3rem 1rem;
+    border-radius: 5px;
+    width: 90%;
+    margin: auto;
+    margin-top: 0.3rem;
+}
+.situation:hover{
+    cursor: pointer;
+}
+#occur.sit_clicked {
+    background-color: #d000ff;
+}
+#occur-bf.sit_clicked {
+    background-color: #f44336;
+    color:#111111;
+}
+#danger.sit_clicked {
+    background-color: #ffeb3b;
+    color:#111111;
+}
+#diff.sit_clicked {
+    background-color: #00d9ff;
+    color:#111111;
+}
+#norm.sit_clicked {
+    background-color: #dbdbdb;
+    color:#111111;
+}
+#send{
+    text-align: center;
+    width:50%;
+    margin: auto;
+    margin-bottom: 5rem;
+    border: 1px solid #ccc;
+    padding:0.3rem 0;
+    border-radius: 10px;
+}
+#send:hover{
+    cursor: pointer;
+    background-color: #333333;
+}
+
+@media screen and (max-width : 800px) {
+    #check, #box{
+        width:90%;
+        margin: auto;
+        margin-top:2rem;
+    }
+    .disaster{
+        width: 30%;
+    }
+}

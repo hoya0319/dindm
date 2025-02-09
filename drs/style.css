@@ -1,0 +1,224 @@
+#box{
+    display: flex;
+}
+#body{
+    margin-bottom: 0;
+}
+#tools{
+    right:440px;
+}
+.right-down{
+    width:400px;
+    background-color: rgb(6,6,6);
+    overflow-y: auto;
+}
+.go_report{
+    display: flex;
+    margin-top: 10px;
+    justify-content: flex-end;
+    justify-content: space-between;
+    align-items: center;
+    color:white;
+}
+.go_report > a{
+    border: 1px solid white;
+    color:white;
+    padding:7px 20px;
+    margin-right: 10px;
+    border-radius: 10px;
+}
+.go_report > h4{
+    font-size: 1.3rem;
+    margin-left: 10px;
+}
+.go_report > a:hover{
+    background-color: rgba(24, 24, 24, 0.7);
+}
+.list_box{
+    border: 1px solid #ccc;
+    margin:0.5rem 1rem;
+    color: #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding:0.5rem 0;
+    border-radius: 5px;
+}
+.list_box_left{
+    width:80%;
+}
+.list_box_right{
+    width:10%;
+    height: 2rem;
+}
+.list_box_text{
+    padding:0;
+}
+.list_box_time{
+    padding:0;
+    font-size: 0.85rem;
+}
+.list_box:hover{
+    cursor: pointer;
+    background-color: rgba(24, 24, 24, 0.7);
+}
+.leaflet-marker-icon{
+    background-color: white;
+    border-radius: 50%;
+}
+
+#info{
+    color:white;
+    padding:1rem;
+    display: none;
+}
+#info_title{
+    border-bottom:1px solid #ccc;
+}
+#info_box_title{
+    margin:0.3rem 0;
+}
+#info_box_time{
+    font-size: 0.85rem;
+}
+.info_box_situation{
+    text-align: center;
+    font-weight: bold;
+    font-size:1.5rem;
+    border:1px solid white;
+    border-radius: 10px;
+    margin:1rem 0;
+    padding:0.5rem 0;
+}
+#info_text{
+    border : 1px solid #ccc;
+    padding:0.3rem;
+    white-space: pre-line;
+}
+#no_data{
+    color:white;
+    text-align: center;
+    padding:6rem 0;
+    display: none;
+}
+#past{
+    margin:1rem;
+    color:white;
+}
+#past > p{
+    padding:0.2rem 0.5rem;
+}
+#past > * {
+    border: 1px solid #ccc;
+}
+.past_list_box{
+    border:1px solid #ccc;
+    padding:0.3rem 0.5rem;
+    display: flex;
+    color:#ccc;
+    flex-direction: column;
+}
+.past_list_box:hover{
+    cursor: pointer;
+    background-color: rgba(24, 24, 24, 0.7);
+}
+#past_info{
+    display: none;
+    color:white;
+    padding:1rem;
+}
+#goInfo{
+    cursor: pointer;
+    color: #ccc;
+    text-align: center;
+    border: 1px solid #ccc;
+    margin: 5rem 5rem 1rem;
+    padding:0.5rem 0;
+    border-radius: 5px;
+}
+#goInfo:hover{
+    background-color: rgba(24, 24, 24, 0.7);
+}
+#past_info_title{
+    border-bottom: 1px solid #ccc;
+}
+#past_info_box_time{
+    font-size:1rem;
+}
+.past_info_box_type{
+    text-align: center;
+    font-weight: bold;
+    border:1px solid white;
+    border-radius: 10px;
+    margin:1rem 0;
+    padding:0.5rem 0;
+}
+#past_info_box_type{
+    font-size:1.5rem;
+}
+.past_info_box_fac{
+    width:90%;
+    margin: auto;
+}
+.past_info_box_fac > h4{
+    text-align: right;
+    padding-right: 0.5rem;
+    border-bottom: 1px solid #ccc;
+}
+.past_info_box_fac > p{
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    white-space: pre-line;
+}
+.leaflet_no_white{
+    background-color: rgba(0, 0, 0, 0);
+}
+.past_legend{
+    border:1px solid #ccc;
+    border-radius: 5px;
+    width:70%;
+    margin:auto;
+    margin-top: 2rem;
+}
+#goPast{
+    display: flex;
+    width: 70%;
+    text-align: center;
+    margin: auto;
+    justify-content: center;
+    margin-top: 1rem;
+    color:white;
+    border:1px solid #ccc;
+    border-radius: 5px;
+    padding:0.6rem 0;
+}
+#goPast:hover{
+    background-color: rgba(24, 24, 24, 0.7);
+}
+.past_legend > div{
+    display: flex;
+    margin:0.3rem 0.6rem;
+    align-items: center;
+}
+.past_legend img{
+    height:1.4rem;
+}
+.past_legend p{
+    margin-left: 0.6rem;
+}
+@media screen and (max-width : 800px) {
+    .right-down{
+        position:fixed !important;
+        top: 90%;
+        z-index: 9999;
+        width:100%;
+        /* transition: 0.1s; */
+    }
+    #tools{
+        right:1rem;
+        bottom:8rem;
+    }
+    .leaflet-control-attribution{
+        display: none;
+    }
+}

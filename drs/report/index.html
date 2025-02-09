@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko-kr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DRS - 재해보고시스템</title>
+    <link href="/all.css" rel="stylesheet">
+    <link rel="icon" type="image/png" href="/favicon.ico"/>
+    <link href="/drs/report/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+</head>
+<body>
+    <header id="mainHeader"></header>
+    <div id="body">
+        <div id="tools">
+        </div>
+        <div id="check">
+            <h2>주변의 안전을 확인하기</h2>
+            <p>우선, 자신의 안전을 확보하십시오. 위험한 곳에 있거나 위험이 임박한 경우에는 대피를 최우선으로 생각하십시오. 자신의 목숨보다 소중한 것은 없습니다.</p>
+            <p>지금 충분히 안전이 확보되어 있나요?</p>
+            <div class="check_btn_box">
+                <p class="check_btn" id="now_safe">네</p>
+                <a href='/drs/' class="check_btn" id="now_no_safe">아니오</a>
+            </div>
+        </div>
+        <div id="box">
+            <h2>주변의 상황을 보고하기</h2>
+            <div class="form-group">
+                <label for="name">이름</label>
+                <input type="text" id="name" name="name" rows="1" required></input>
+            </div>
+            <div class="form-group">
+                <label>위치</label>
+                <p>보고할 재해가 발생한 위치를 클릭해 주세요.</p>
+                <div id="map"></div>
+            </div>
+            <div class="form-group">
+                <label>재해 종류</label>
+                <div class="disaster-box">
+                    <p class="disaster">지진</p>
+                    <p class="disaster">폭우</p>
+                    <p class="disaster">홍수</p>
+                    <p class="disaster">산사태</p>
+                    <p class="disaster">번개</p>
+                    <p class="disaster">폭염</p>
+                    <p class="disaster">한파</p>
+                    <p class="disaster">폭설</p>
+                    <p class="disaster">화재</p>
+                    <p class="disaster">강풍</p>
+                    <p class="disaster">토네이도</p>
+                    <p class="disaster">지진해일</p>
+                    <p class="disaster">폭풍해일</p>
+                    <p class="disaster">황사・미세먼지</p>
+                    <p class="disaster">테러</p>
+                    <p class="disaster">화산</p>
+                    <p class="disaster">사회재난</p>
+                    <p class="disaster">기타</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>상황</label>
+                <p class="situation" id="occur">재해 발생</p> 
+                <p class="situation" id="occur-bf">재해 발생 임박</p> 
+                <p class="situation" id="danger">위험 감지</p> 
+                <p class="situation" id="diff">평소와 다름</p> 
+                <p class="situation" id="norm">평소</p> 
+            </div>
+            <div class="form-group">
+                <label for="message">내용</label>
+                <textarea id="message" name="message" rows="4" placeholder="개인정보가 노출되지 않게 주의하십시오." required></textarea>
+            </div>
+            <p id="send">전송하기</p>
+        </div>
+    </div>
+</body>
+<script src="/src/mainHeaders.js"></script>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script src="/src/tools.js"></script>
+<script src="/drs/report/script.js"></script>
+</html>

@@ -5,18 +5,98 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DRS - 재해보고시스템</title>
     <link href="/all.css" rel="stylesheet">
+    <link rel="icon" type="image/png" href="/favicon.ico"/>
+    <link href="/drs/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 </head>
 <body>
     <header id="mainHeader"></header>
     <div id="body">
-        <div id="announce">
-        </div>
         <div id="tools">
         </div>
-        <footer id="footer"></footer>
+        <div id="box">
+            <div class="left-up">
+                <div id="map">
+
+                </div>
+            </div>
+            <div class="right-down" id="right-down">
+                <div class="go_report">
+                    <h4>재해보고시스템</h4>
+                    <a href="/drs/report/">신규 보고</a>
+                </div>
+                <h2 id="no_data">최근 24시간 내<br>등록된 보고가 없습니다.</h2>
+                <div id="info">
+                    <h4 id="info_title"></h4>
+                    <div class="info_box">
+                        <h3 id="info_box_title"></h3>
+                        <p id="info_box_time"></p>
+                        <p class="info_box_situation" id="info_box_situation"></p>
+                        <p id="info_text"></p>
+                    </div>
+                </div>
+                <div id="list">
+
+                </div>
+                <div id="past_info">
+                    <h3 id="past_info_title"></h3>
+                    <p id="past_info_box_time"></p>
+                    <div class="past_info_box">
+                        <div class="past_info_box_type">
+                            <p id="past_info_box_type"></p>
+                            <p id="past_info_box_type_val"></p>
+                        </div>
+                        <div class="past_info_box_fac">
+                            <h4 id="past_info_intensity4"></h4>
+                            <p id="past_info_intensity"></p>
+                            <h4 id="past_info_human4"></h4>
+                            <p id="past_info_human"></p>
+                            <h4 id="past_info_free4"></h4>
+                            <p id="past_info_free"></p>
+                        </div>
+                        <div class="past_legend">
+                            <div>
+                                <img src="/drs/images/red.svg" alt="빨강">
+                                <p id="legend_red"></p>
+                            </div>
+                            <div>
+                                <img src="/drs/images/orange.svg" alt="주황">
+                                <p id="legend_orange"></p>
+                            </div>
+                            <div>
+                                <img src="/drs/images/yellow.svg" alt="노랑">
+                                <p id="legend_yellow"></p>
+                            </div>
+                            <div>
+                                <img src="/drs/images/green.svg" alt="초록">
+                                <p id="legend_green"></p>
+                            </div>
+                            <div>
+                                <img src="/drs/images/blue.svg" alt="파랑">
+                                <p id="legend_blue"></p>
+                            </div>
+                            <div>
+                                <img src="/drs/images/gray.svg" alt="회색">
+                                <p id="legend_gray"></p>
+                            </div>
+                        </div>
+                        <a href="#" id="goPast">이 재해에 대해 보고하기 ></a>
+                    </div>
+                    <p id="goInfo">< 돌아가기</p>
+                </div>
+                <div id="past">
+                    <p>과거 재해 목록</p>
+                    <div id="past_list">
+
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
-<script type="module" src="/src/announce.js"></script>
 <script src="/src/mainHeaders.js"></script>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script src="/src/tools.js"></script>
+<script src="/drs/script.js"></script>
+<script src="/drs/map.js"></script>
 </html>
