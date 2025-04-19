@@ -57,6 +57,8 @@ fetch(`http://localhost:3000/drs/past/report?id=${id}`)
             text(['설 수 없을 정도로 흔들림', '격렬하게 흔들림', '강하게 흔들림', '약하게 흔들림', '흔들린것 같은 느낌', '흔들리지 않음'])
         }else if(res.type == '폭우'){
             text(['완전 침수', '절반 정도 침수', '부분 침수', '피해 발생', '약간의 피해', '피해 없음'])
+        }else if(res.type == '산불'){
+            text(['전소', '일부 소실', '약간 소실', '다량의 연기', '약간의 연기', '피해 없음'])
         }
 
         var coord = []
@@ -98,6 +100,14 @@ fetch(`http://localhost:3000/drs/past/report?id=${id}`)
             }
         })
         document.getElementById('submit').addEventListener("click", async function(){
+            if(coord.length == 0){
+                alert('위치정보를 수집해주세요.');
+                return;
+            }
+            if(clicked == ''){
+                alert('피해 상황을 선택해주세요.');
+                return;
+            }
             var data = {
                 "id" : res.id,
                 "data" : {

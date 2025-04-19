@@ -3,11 +3,10 @@ document.getElementById('now_safe').addEventListener('click', function(){
     document.getElementById('check').style.display = 'none'
     document.getElementById('box').style.display = 'block'
     const map = L.map('map').setView([36.5, 127.5], 7); // 서울 중심 좌표
-    L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.{ext}', {
-        minZoom: 0,
-        maxZoom: 20,
-        attribution: '&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-        ext: 'png'
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 18,
+        minZoom: 2,
+        attribution: `© OpenStreetMap`
     }).addTo(map);
 
 
@@ -82,7 +81,7 @@ document.getElementById('send').addEventListener('click', async function() {
         alert('재해 종류를 선택해주세요');
         return;
     }if(selectedSituation.length == 0){
-        alert('재해 종류를 선택해주세요');
+        alert('재해 상황을 선택해주세요');
         return;
     }
     var data = {

@@ -27,6 +27,12 @@
     margin-right: 10px;
     border-radius: 10px;
 }
+.leaflet-layer,
+.leaflet-control-zoom-in,
+.leaflet-control-zoom-out,
+.leaflet-control-attribution {
+    filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%);
+}
 .go_report > h4{
     font-size: 1.3rem;
     margin-left: 10px;
