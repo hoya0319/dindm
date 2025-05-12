@@ -22,17 +22,11 @@ note.href = '/note/'
 note.textContent = '방재수첩';
 right.appendChild(note)
 
-const bangjaeHub = document.createElement('a');
-bangjaeHub.className = 'mainHeaderIcon';
-bangjaeHub.href = '/bangjaehub/'
-bangjaeHub.textContent = '한국방재';
-right.appendChild(bangjaeHub)
-
-const bousaiHub = document.createElement('a');
-bousaiHub.className = 'mainHeaderIcon';
-bousaiHub.href = '/bousaihub/'
-bousaiHub.textContent = '일본방재';
-right.appendChild(bousaiHub)
+const drr = document.createElement('a');
+drr.className = 'mainHeaderIcon';
+drr.href = '/drr/'
+drr.textContent = '방재';
+right.appendChild(drr)
 
 const drs = document.createElement('a');
 drs.className = 'mainHeaderIcon';

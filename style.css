@@ -195,6 +195,25 @@
     content: "";
     top:23px;
 }
+.menu{
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 0;
+}
+.menu a{
+    font-size: 1.5rem;
+    font-family: 'NanumSquareNeoExtraBold';
+    color: #7c7c7c;
+    text-decoration: none;
+    text-align: center;
+    border: #efefef 3px solid;
+    width:240px;
+    padding:3rem 0;
+    border-radius: 10px;
+}
+.menu a:hover{
+    background-color: #efefef;
+}
 @media screen and (max-width : 1300px) {
     .banner h1{
         padding-left: 10rem;
