@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ko-kr">
+<html>
+<head>
+    <title>방재허브_일본 - 지진정보</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="/drr/jp/style.css">
+    <link rel="stylesheet" href="/drr/jp/disaster/style.css">
+    <link rel="stylesheet" href="/drr/jp/disaster/earthquake/style.css">
+    <link href="/all.css" rel="stylesheet">
+    <link rel="icon" type="image/png" href="/favicon.ico"/>
+</head>
+<body>
+    <header id="mainHeader"></header>
+    <div id="tools">
+    </div>
+    <div class="content">
+        <!-- <div id="announce">
+        </div> -->
+        <div class="contentTop">
+            <h2>지진정보</h2>
+        </div>
+        <div class="contentBox">
+            <div class="left">
+                <div id="map" class="first"></div>
+                <div class="map_bar">
+                    <div id="legend">
+                        <div class="legend">
+                            <div>
+                                <img src="./images/int1.svg">
+                                <p>진도 1</p>
+                            </div>
+                            <div>
+                                <img src="./images/int2.svg">
+                                <p>진도 2</p>
+                            </div>
+                            <div>
+                                <img src="./images/int3.svg">
+                                <p>진도 3</p>
+                            </div>
+                            <div>
+                                <img src="./images/int4.svg">
+                                <p>진도 4</p>
+                            </div>
+                            <div>
+                                <img src="./images/int5l.svg">
+                                <p>진도 5약</p>
+                            </div>
+                            <div>
+                                <img src="./images/int5u.svg">
+                                <p>진도 5강</p>
+                            </div>
+                            <div>
+                                <img src="./images/int6l.svg">
+                                <p>진도 6약</p>
+                            </div>
+                            <div>
+                                <img src="./images/int6u.svg">
+                                <p>진도 6강</p>
+                            </div>
+                            <div>
+                                <img src="./images/int7.svg">
+                                <p>진도 7</p>
+                            </div>
+                        </div>
+                        <div class="button-container">
+                            <p id="areaBtn">지역별 진도</p>
+                            <p id="stationBtn">지점별 진도</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="right" id="right">
+                <div class="earthquakeInfo" id="earthquakeInfo">
+                    <h2 id="title"></h2>
+                    <p id="reportDateTime"></p>
+                    <div class="intmag" id="intmag">
+                        <div class="int">
+                            <p>최대진도</p>
+                            <h4 class="intValue" id="intValue"></h4>
+                        </div>
+                        <div class="mag">
+                            <p>규모</p>
+                            <h4 class="magValue"><span id="magType"></span><span id="magValue"></span></h4>
+                        </div>
+                    </div>
+                    <p id="originTime"></p>
+                    <h2 id="epicenter"></h2>
+                    <p id="depth"></p>
+                    <p id="forcastComment"></p>
+                    
+                </div>
+                <div class="etcInfo" id="etcInfo">
+                </div>  
+            </div>
+        </div>
+        <div class="contentBox">
+            <div class="left">
+                <div id="intensityList"></div>
+            </div>
+            <div class="right">
+                <div class="earthquakeList">
+                    <div id="earthquakeListBox"></div>
+                    <div id="paginationControls">
+                        <p id="prevBtn"><</p>
+                        <p id="nextBtn">></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script type="module" src="/drr/jp/disaster/earthquake/script.js"></script>
+<script src="/src/mainHeaders.js"></script>
+<script src="/src/tools.js"></script>
+<script src="/src/pagelink.js"></script>
+<!-- <script type="module" src="/src/announce.js"></script> -->
+</html>

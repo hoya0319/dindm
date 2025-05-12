@@ -1,0 +1,65 @@
+.button-container{
+    display: flex;
+    overflow-x: auto;
+}
+.button-container::-webkit-scrollbar {
+    width: 3px;
+}
+.button-container::-webkit-scrollbar-thumb {
+    background-color: #999999;
+    border-radius: 10px;
+}
+
+.button-container::-webkit-scrollbar-track {
+    background-color: rgb(210, 210, 210);
+    border-radius: 10px;
+}
+.amedas_button{
+    text-align: center;
+    min-width: 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.amedas_button:nth-child(n+1){
+    border-left: 1px solid rgb(210, 210, 210);
+}
+.amedas_button:hover{
+    cursor: pointer;
+}
+#time{
+    margin-left: 2%;
+}
+table{
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin: auto;
+    margin-top: 1rem;
+}
+th, td{
+    border-color: black;
+    border-style: solid;
+    border-width: 1px;
+}
+th{
+    width:40%;
+    padding:5px 0px;
+}
+td{
+    padding:5px;
+}
+.now_clicked{
+    background-color: #ccc;
+}
+.station_info{
+    font-size: 0.9rem;
+    color:#6e6e6e;
+    padding:0px;
+}
+.station_info_title{
+    margin-top:0.5rem;
+}
+#legend_temp, #legend_pre1h, #legend_pre10m, #legend_pre3h, #legend_pre24h, #legend_wind, #legend_humid, #legend_sun1h{
+    display: none;
+}

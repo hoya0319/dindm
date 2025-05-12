@@ -1,0 +1,171 @@
+
+.earthquakeInfo{
+    margin-left: 2%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin-bottom: 0.5rem;
+    /* white-space: pre-line; */
+}
+#reportDateTime{
+    border-bottom: 1px solid black;
+}
+.intmag{
+    display: flex;
+    width:95%;
+    border: 1px solid ;
+    border-radius: 0.5rem;
+    margin:auto;
+    margin-top:1rem;
+    padding: 1rem 0.5rem;
+}
+.intmag > div{
+    width: 50%;
+    /* text-align: center; */
+}
+.intmag > div > p{
+    padding-left: 15%;
+    padding-bottom: 0;
+}
+.intmag > div > h4{
+    text-align: center;
+    font-size: 2rem;
+}
+#magType{
+    font-size:1rem;
+    padding-right: 5px;
+    font-weight: normal;
+}
+#originTime{
+    margin-top:0.5rem;
+}
+#depth{
+    border-bottom:#ccc 1px solid;
+}
+#forcastComment{
+    white-space: pre-wrap;
+}
+.lngInfo{
+    font-size : 1.2rem;
+    text-align: center;
+    padding:0.5rem 1rem;
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+    border-radius: 0.5rem;
+    font-weight: bold;
+}
+.lngInfo:hover {
+    filter: brightness(90%);
+}
+.tsunamiInfo{
+    font-size : 1.2rem;
+    text-align: center;
+    padding:0.5rem 1rem;
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+    border-radius: 0.5rem;
+    font-weight: bold;
+}
+.tsunamiInfo:hover{
+    cursor: pointer;
+    background-color: rgb(189, 0, 0);
+}
+#earthquakeListBox{
+    margin-top: 2rem;
+}
+#paginationControls{
+    display: flex;
+    justify-content: center;
+}
+#paginationControls p{
+    width:3rem;
+    text-align: center;
+}
+#paginationControls p:hover{
+    cursor: pointer;    
+    background-color: #f0f0f0;
+}
+.content {
+    margin-bottom: 3rem;
+}
+#earthquakeListBox table tbody tr {
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+#earthquakeListBox table tbody tr::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0);
+    /* 기본은 투명 */
+    transition: background 0.2s ease;
+    z-index: 1;
+}
+
+#earthquakeListBox table tbody tr:hover::after {
+    background: rgba(0, 0, 0, 0.05);
+    /* hover 시 살짝 어두운 오버레이 */
+}
+.button-container{
+    display: flex;
+    justify-content: center;
+}
+.button-container p{
+    width: 50%;
+    text-align: center;
+    padding:0.5rem 0
+}
+.button-container p:hover{
+    cursor: pointer;
+    background-color: #f0f0f0;
+}
+#stationBtn{
+    background-color: rgb(0,123,255);
+    color: white;
+    border-bottom-right-radius: 8px;
+}
+#areaBtn{
+    border-bottom-left-radius: 8px;
+}
+.legend{
+    overflow-x: auto;
+}
+.legend div{
+    min-width: 4rem;
+}
+#intensityList{
+    margin-top:2rem;
+}
+.earthquakeList{
+    margin-left:2%;
+}
+.etcInfoBox{
+    margin-left : 2%;
+    margin-top: 1rem;
+    border:1px solid #ccc;
+    padding: 10px;
+}
+.etcInfoBox p{
+    font-size: 1rem;
+    white-space: pre-wrap;
+}
+.etcInfoBox a{
+    font-size: 1rem;
+}
+.etcInfoBox a:hover{
+    text-decoration: underline;
+}
+@media screen and (max-width: 1150px) {
+    .earthquakeInfo{
+        margin-top:1rem;
+    }
+    #magValue{
+        font-size: 2rem;
+    }
+}
