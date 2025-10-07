@@ -1,6 +1,9 @@
 var h = window.innerHeight;
 document.getElementById('map').style.height = h - 48 + 'px'
-var map = L.map('map').setView([38.26, 135.59], 6);
+var map = L.map('map',{
+    zoomSnap: 2
+});
+map.setView([38.26, 135.59], 6)
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 10,

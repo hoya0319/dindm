@@ -1,0 +1,136 @@
+{
+    "title" : "방재허브 - 일본",
+    "url" : "/drr/jp/",
+    "contents" : [
+        {
+            "title" : "지진",
+            "href" : "/drr/jp/disaster/earthquake",
+            "description" : "지진에 관련된 다양한 정보들을 확인하실 수 있습니다.",
+            "items" : [
+                {
+                    "title" : "지진정보",
+                    "href" : "/drr/jp/disaster/earthquake/",
+                    "img" : "/drr/jp/src/earthquake.jpg",
+                    "out_site" : false,
+                    "description" : "일본에서 발생한 진도 1 이상의 지진을 확인하실 수 있습니다."
+                },
+                {
+                    "title" : "장주기지진동 관측정보",
+                    "href" : "/drr/jp/disaster/lngint/",
+                    "img" : "/drr/jp/src/lngint.jpg",
+                    "out_site" : false,
+                    "description" : "가장 최근의 장주기지진동계급 1 이상 관측된 지진을 확인하실 수 있습니다."
+                },
+                {
+                    "title" : "진앙분포",
+                    "href" : "/drr/jp/disaster/hypocenter/",
+                    "img" : "/drr/jp/src/earthquake.jpg",
+                    "out_site" : false,
+                    "description" : "일별 일본에서 발생한 모든 지진을 확인할 수 있습니다."
+                },
+                {
+                    "title" : "난카이트로프 지진 정보",
+                    "href" : "/special/nankai/explain-info/",
+                    "img" : "/drr/jp/src/nankai.jpg",
+                    "out_site" : true,
+                    "description" : "발표된 난카이트로프 지진 관련 정보를 확인하실 수 있습니다."
+                },
+                {
+                    "title" : "홋카이도・산리쿠 해역 후발지진 정보",
+                    "href" : "/special/sanriku/explain-info/",
+                    "img" : "/drr/jp/src/hokkaido.jpg",
+                    "out_site" : true,
+                    "description" : "발표된 홋카이도・산리쿠 해역 후발지진 주의 정보를 확인하실 수 있습니다."
+                }
+            ]
+        },
+        {
+            "title" : "해일",
+            "href" : "/drr/jp/disaster/tsunami",
+            "description" : "해일에 관련된 다양한 정보들을 확인하실 수 있습니다.",
+            "items" : [
+                {
+                    "title" : "해일정보",
+                    "href" : "/drr/jp/disaster/tsunami/",
+                    "img" : "/drr/jp/src/tsunami.jpg",
+                    "out_site" : false,
+                    "description" : "일본에 발표중인 해일정보(해일예보・해일주의보・해일경보・대해일경보)를 확인하실 수 있습니다."
+                }
+            ]
+        },
+        {
+            "title" : "태풍",
+            "href" : "/drr/jp/disaster/typhoon/",
+            "description" : "태풍에 관련된 다양한 정보들을 확인하실 수 있습니다.",
+            "items" : [
+                {
+                    "title" : "태풍정보",
+                    "href" : "/drr/jp/disaster/typhoon/",
+                    "img" : "/drr/jp/src/typhoon.jpg",
+                    "out_site" : false,
+                    "description" : "현재 발표중인 태풍정보(5일 진로・강도 예보)를 확인하실 수 있습니다."
+                }
+            ]
+        },
+        {
+            "title" : "경보・주의보",
+            "href" : "/drr/jp/disaster/weatherwarning/",
+            "description" : "기상경보・호우경계레벨에 관련된 다양한 정보들을 확인하실 수 있습니다.",
+            "items" : [
+                {
+                    "title" : "기상경보・주의보",
+                    "href" : "/drr/jp/disaster/weatherwarning/",
+                    "img" : "/drr/jp/src/earthquake.jpg",
+                    "out_site" : false,
+                    "description" : "현재 발표중인 기상경보・주의보(주의보・경보・위험경보・특별경보)를 확인하실 수 있습니다."
+                },{
+                    "title" : "키키쿠루",
+                    "href" : "/drr/jp/disaster/kikikuru/",
+                    "img" : "/drr/jp/src/earthquake.jpg",
+                    "out_site" : true,
+                    "description" : "현재의 토사재해・침수해・홍수해 위험도를 지도에서 확인하실 수 있습니다."
+                }
+            ]
+        },
+        {
+            "title" : "기상",
+            "href" : "/drr/jp/weather/radar/",
+            "description" : "기상에 관련된 다양한 정보들을 확인하실 수 있습니다.",
+            "items" : [
+                {
+                    "title" : "고해상도 나우캐스트",
+                    "href" : "/drr/jp/weather/radar/",
+                    "img" : "/drr/jp/src/earthquake.jpg",
+                    "out_site" : true,
+                    "description" : "현재의 비구름 및 수 시간 후의 예측, 번개 상황 등을 확인하실 수 있습니다."
+                },{
+                    "title" : "아메다스",
+                    "href" : "/drr/jp/weather/amedas/",
+                    "img" : "/drr/jp/src/earthquake.jpg",
+                    "out_site" : false,
+                    "description" : "현재 기온, 강수량, 습도, 바람 등을 확인하실 수 있습니다."
+                }
+            ]
+        },
+        {
+            "title" : "알림",
+            "href" : "/drr/jp/announce/notice/",
+            "description" : "방재허브 - 일본에 관련된 안내사항입니다.",
+            "items" : [
+                {
+                    "title" : "공지",
+                    "href" : "/drr/jp/announce/notice/",
+                    "img" : "/drr/jp/src/earthquake.jpg",
+                    "out_site" : false,
+                    "description" : "방재허브 - 일본에 관련된 공지사항입니다."
+                },{
+                    "title" : "이용안내",
+                    "href" : "/drr/jp/announce/how/",
+                    "img" : "/drr/jp/src/earthquake.jpg",
+                    "out_site" : false,
+                    "description" : "방재허브 - 일본을 이용하는 방법을 확인하실 수 있습니다."
+                }
+            ]
+        }
+    ]
+}

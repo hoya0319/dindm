@@ -2,7 +2,7 @@ function mon_day(time){
     return `${time.slice(4,6)}월 ${time.slice(6,8)}일 ${time.slice(8,10)}시 ${time.slice(10,12)}분`
 }
 
-var map = L.map('map').setView([35.6, 136.7], 5);
+var map = L.map('map', { zoomControl: false }).setView([35.6, 136.7], 5);
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 10,
@@ -185,7 +185,9 @@ function getIcon(type, value){
     }else if(type == 'temp'){
         if(value == null){
             return L.icon({iconUrl: '/drr/jp/weather/amedas/icons/station.svg',iconSize: [4, 4]})
-        }else if(value >= 35){
+        }else if(value >= 40){
+            return L.icon({iconUrl: '/drr/jp/weather/amedas/icons/temp0.svg',iconSize: [12, 12]})
+        }else if(35 <= value && value < 40){
             return L.icon({iconUrl: '/drr/jp/weather/amedas/icons/temp1.svg',iconSize: [12, 12]})
         }else if(30 <= value && value < 35){
             return L.icon({iconUrl: '/drr/jp/weather/amedas/icons/temp2.svg',iconSize: [12, 12]})
@@ -299,7 +301,7 @@ function getWindIcon(type, value, dir){
 var weatherData, locations
 var markers = []
 async function getData(){
-    await fetch('http://192.168.45.190:3000/jp_amedas')
+    await fetch('http://localhost:3000/jp_amedas')
         .then(response => response.json())
         .then(data => {
             weatherData = data;
@@ -309,7 +311,7 @@ async function getData(){
     
 }
 function getStation(){
-    fetch('http://192.168.45.190:3000/jp_amedas_station')
+    fetch('http://localhost:3000/jp_amedas_station')
         .then(response => response.json())
         .then(data => {
             locations = data;

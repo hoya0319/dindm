@@ -8,10 +8,15 @@
     <link rel="stylesheet" href="/drr/jp/style.css">
     <link rel="stylesheet" href="/drr/jp/weather/amedas/style.css">
     <link href="/all.css" rel="stylesheet">
+    <link href="/drr/style_menuBar.css" rel="stylesheet">
     <link rel="icon" type="image/png" href="/favicon.ico"/>
 </head>
 <body>
     <header id="mainHeader"></header>
+    <div id="mainMenuBox"></div>
+    <div id="drrMenuBox">
+    </div>
+    <div id="dropDownContainer"></div>
     <div id="tools">
     </div>
     <div class="content">
@@ -197,8 +202,12 @@
                                 <p>~35°C</p>
                             </div>
                             <div>
-                                <img src="./icons/temp1.svg" src="35°C 이상">
-                                <p>35°C~</p>
+                                <img src="./icons/temp1.svg" src="40°C 미만">
+                                <p>~40°C</p>
+                            </div>
+                            <div>
+                                <img src="./icons/temp0.svg" src="40°C 이상">
+                                <p>40°C~</p>
                             </div>
                         </div>
                         <div class="legend" id="legend_wind">
@@ -343,4 +352,5 @@
 <script src="/drr/jp/weather/amedas/script.js"></script>
 <script src="/src/mainHeaders.js"></script>
 <script src="/src/tools.js"></script>
+<script src="/drr/src/menubar.js"></script>
 </html>

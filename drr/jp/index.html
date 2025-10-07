@@ -5,23 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>방재허브_일본</title>
     <link href="/all.css" rel="stylesheet">
+    <link href="/drr/drr.css" rel="stylesheet">
+    <link href="/drr/style_menuBar.css" rel="stylesheet">
     <link rel="icon" type="image/png" href="/favicon.ico"/>
 </head>
 <body>
     <header id="mainHeader"></header>
+    <div id="mainMenuBox"></div>
+    <div id="drrMenuBox">
+    </div>
+    <div id="dropDownContainer"></div>
     <div id="body">
         <div id="announce">
         </div>
         <div id="tools">
         </div>
-        <div>
-            <a href="/drr/jp/disaster/typhoon/"><h2>태풍정보(임시)</h2></a>
-            <a href="/drr/jp/weather/amedas/"><h2>아메다스(임시)</h2></a>
-            <a href="/drr/jp/disaster/earthquake/"><h2>지진정보(임시)</h2></a>
-            <a href="/drr/jp/disaster/tsunami/"><h2>해일정보(임시)</h2></a>
-            <a href="/drr/jp/disaster/tornado/"><h2>토네이도주의정보(임시)</h2></a>
-            <a href="/drr/jp/disaster/kikikuru/"><h2>키키쿠루(임시)</h2></a>
-            <a href="/drr/jp/weather/radar/"><h2>고해상도 나우캐스트(임시)</h2></a>
+        <div class="main">
+            <h2>방재허브 - 일본</h2>
+            <div id="drrJpAnnounce"></div>
+            <div id="contents">
+
+            </div>
         </div>
     </div>
     <footer id="footer"></footer>
@@ -29,4 +33,6 @@
 <script type="module" src="/src/announce.js"></script>
 <script src="/src/mainHeaders.js"></script>
 <script src="/src/tools.js"></script>
+<script src="/drr/src/menubar.js"></script>
+<script src="/drr/src/drr.js"></script>
 </html>
