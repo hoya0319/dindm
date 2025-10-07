@@ -3,7 +3,8 @@
 
 html, body{
     margin:0px;
-    padding:0px;font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+    padding:0px;
+    font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
     width:100vw;
     overflow-x: hidden;
     line-height: 1.3;
@@ -86,7 +87,7 @@ a{
 }
 .announceBox{
     margin:auto;
-    margin-top: 2rem;
+    /* margin-top: 2rem; */
     margin-bottom: 2rem;
     width:50rem;
     border-radius: 5px;
@@ -196,33 +197,73 @@ a{
 #toolbar_menu:hover{
     cursor: pointer;
 }
-.menuBox{
-    position: fixed;
-    left: 0;
-    top:48px;
-    width:100vw;
-    height: 40vh;
-    background-color:white;
-    box-shadow: 0 0 0 1px rgba(0, 0, 0, .04), 0 2px 3px 0 rgba(0, 0, 0, .12);
-    z-index: 99999;
+.mainHeaderMenuBox{
     display: flex;
-    justify-content: space-around;
-    border-top: 2px solid #ccc;
+    flex-direction: column;
+    align-items: center;
+    padding : 0px 10px;
+    cursor: pointer;
+    margin-left: 0.5rem;
+    transition: 0.2s ease-in-out;
+    border-radius: 10px;
+}
+.mainHeaderMenuIcon{
+    height: 30px;
+}
+.mainHeaderMenuText{
+    font-size:13px;
+    margin-top:-5px;
+}
+#mainMenuBox{
+    position: fixed;
+    top:3rem;
+    left: 0px;
+    background-color: #f9f9f9;
+    height: calc(100vh - 3rem);
+    width: 20rem;
+    z-index: 9999;
     display: none;
-}
-.menuTitle{
-    color:#111111;
-    font-size: 1.5rem;
-    font-weight: bold;
-}
-.menuBoxInside{
-    width:25%;
-    padding:0.5rem;
-    max-height:100%;
     overflow-y: auto;
 }
-.menuBoxInside:nth-child(n+2){
-    border-left: 1px solid #ccc;
+.menuContentBox{
+    display: flex;
+    flex-direction: column;
+    margin:0.2rem 0;
+}
+.menuContentBox a, .menuContentBox p{
+    font-size:1.2rem;
+    color:#1f1f20;
+    padding:0.3rem 0.2rem;
+}
+.contentTitleBox{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+.contentTitleBox:hover, .menuContentBox>a:hover, .menuSpeTitle:hover{
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 5px;
+}
+.contentTitleBox img{
+    height:30px;
+}
+.menuSpeBox{
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    margin:0 0.5rem 0.5rem 1rem;
+    display: none;
+    border-radius: 5px;
+    padding:0.3rem;
+}
+.menuBox{
+    margin:0.5rem 0.7rem 1.4rem;
+}
+.menuBox h2{
+    padding:0.5rem 0.2rem;
+    border-bottom: 1px solid #bbbbbb;
+    cursor: default;
 }
 .pages{
     display: flex;
@@ -247,6 +288,13 @@ a{
     border-radius: 5px;
     margin-right: 1rem;
 }
+.info{
+    color:#5f6368;
+    font-size: 0.8rem;
+}
+.leaflet-control-attribution{
+    font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+}
 @media (min-width: 769px) {
     .menu-button {
         display: none;
@@ -258,34 +306,6 @@ a{
     }
 }
 @media screen and (max-width : 900px) {
-    .menuBox{
-        flex-direction: column;
-        justify-content: flex-start;
-        height: 90vh;
-        overflow-y: auto;
-        align-items: center;
-    }
-    .menuBoxInside:nth-child(n+2){
-        border-top: 1px solid #ccc;
-        border-left: none;
-    }
-    .menuBoxInside{
-        width:80%;
-        margin: 0.3rem 0 0 0;
-        padding: 0.3rem 0 0 0;
-        min-height: 2rem;
-        height:30%;
-    }
-    .menuBoxInside:nth-child(4){
-        width:80%;
-        margin: 0.3rem 0 0 0;
-        padding: 0.3rem 0 0 0;
-        min-height: 2rem;
-        height:8%;
-    }
-    .menuTitle{
-        font-size: 1.3rem;
-    }
     .littleTitle{
         font-size : 1.1rem;
     }
