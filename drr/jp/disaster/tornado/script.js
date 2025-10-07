@@ -1,5 +1,5 @@
 import mon_day from '../../../../src/time.js'
-var map = L.map('map').setView([35.6, 136.7], 5);
+var map = L.map('map', { zoomControl: false }).setView([35.6, 136.7], 5);
 
 let id = ''
 const searchParams = new URLSearchParams(location.search);
@@ -15,7 +15,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 var geojson
 
 function getTornado() {
-    fetch('http://192.168.45.190:3000/jp_tornado')
+    fetch('http://localhost:3000/jp_tornado')
         .then(response => response.json())
         .then(data => {
             console.log(data); // JSON 데이터 사용
@@ -111,7 +111,7 @@ function getTornado() {
         });
 }
 
-fetch('http://192.168.45.190:3000/jp_class10s')
+fetch('http://localhost:3000/jp_class10s')
     .then(response => response.json())
     .then(data => {
         // console.log(data); // JSON 데이터 사용

@@ -1,89 +1,105 @@
 <!DOCTYPE html>
-<html lang="ko">
-
+<html lang="ko-kr">
 <head>
-    <meta charset="UTF-8">
+    <title>방재허브_일본 - 태풍정보</title>
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>방재허브_일본 - 태풍</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="/drr/jp/style.css">
+    <link rel="stylesheet" href="/drr/jp/disaster/style.css">
     <link rel="stylesheet" href="/drr/jp/disaster/typhoon/style.css">
     <link href="/all.css" rel="stylesheet">
+    <link href="/drr/style_menuBar.css" rel="stylesheet">
     <link rel="icon" type="image/png" href="/favicon.ico"/>
 </head>
-
 <body>
     <header id="mainHeader"></header>
+    <div id="mainMenuBox"></div>
+    <div id="drrMenuBox">
+    </div>
+    <div id="dropDownContainer"></div>
     <div id="tools">
     </div>
-    <div id="map">
-
-    </div>
-    <p id="spe">상세보기</p>
-    <p id="rain">고해상도 나우캐스트</p>
-    <div class="button-container" id="buttonContainer"></div>
-    <h1 id="noTyp">현재 태풍정보는 발표되어 있지 않습니다.</h1>
-    <div class="infoBox" id="infoBox">
-        <div id="name">
-            <h4 id="typNum"></h4>
-            <h1 id="typName"></h1>
-            <p id="reportTime"></p>
+    <div class="content">
+        <!-- <div id="announce">
+        </div> -->
+        <div class="contentTop">
+            <h2>태풍정보</h2>
         </div>
-        <div class="typ_now">
-            <h4 class="now_class" id="now_class"></h4>
-            <p class="now_time" id="now_time"></p>
-            <p id="remark"></p>
-            <div id="typ_prop">
-                <span id="now_size"></span>
-                <span id="now_strength"></span>
-            </div>
-            <div class="typ_now_box">
-                <div>
-                    <p>중심기압</p> <span id="center_hpa"></span>
-                    <p>hPa</p>
+        <div class="contentBox">
+            <div class="left">
+                <div id="map">
+                    <h3 id="notyp">현재 태풍정보는 발표되어 있지 않습니다</h3>
                 </div>
-                <div>
-                    <p>최대풍속</p> <span id="center_max_wind_speed"></span>
-                    <p>m/s</p>
+                <div class="map_bar_typ">
+                    <div id="typ_all">
+                        <a href="/drr/jp/disaster/typhoon/">현재 진행중인 모든 태풍 보기</a>
+                    </div>
+                    <p id="suiteiON">1시간 후 추정</p>
                 </div>
             </div>
-            <div class="under">
-                <div class="under_box">
-                    <p>중심위치 정확도</p>
-                    <h4 id="acc"></h4>
-                </div>
-                <div class="under_box">
-                    <p>최대순간풍속</p>
-                    <div>
-                        <h4 id="center_max_shun_wind_speed"></h4>
+            <div class="right">
+                <div id="clickit" class="right_box">
+                    <!-- <h4>자세한 정보를 보려면 태풍명을 클릭해주세요</h4> -->
+                    <h3>태풍목록</h3>
+                    <div id="typ_list">
                     </div>
                 </div>
-                <div class="under_box">
-                    <p>이동방향</p>
-                    <h4 id="mov_dir"></h4>
-                </div>
-                <div class="under_box">
-                    <p>이동속도</p>
-                    <div>
-                        <h4 id="mov_spd"></h4>
-                        <p id="mov_tan">&nbsp;km/h</p>
+                <div id="typ_info" class="right_box">
+                    <h2 id="typ_name"></h2>
+                    <p id="typ_reportTime"></p>
+                    <div id="typ_prop">
+                        <span id="now_size"></span>
+                        <span id="now_strength"></span>
                     </div>
-                </div>
-                <div class="under_box">
-                    <p>강풍역</p>
-                    <h4 id="strong_area"></h4>
-                </div>
-                <div class="under_box">
-                    <p>폭풍역</p>
-                    <h4 id="storm_area"></h4>
+                    <p id="typ_outline"></p>
+                    <div class="typ_now">
+                        <span id="targetTime"></span>
+                        <div>
+                            <h4><span>중심기압</span> <span><span id="center_hPa" class="typ_now_value"></span><span> hPa</span></span></h4>
+                        </div>
+                        <div>
+                            <h4><span>최대풍속</span> <span><span id="center_speed" class="typ_now_value"></span><span> m/s</span></span></h4>
+                        </div>
+                    </div>
+                    <div class="now_spe">
+                        <div class="now_spe_box">
+                            <p>최대순간풍속</p>
+                            <h4 id="center_instwind_speed"></h4>
+                        </div>
+                        <div class="now_spe_box">
+                            <p>이동방향・속도</p>
+                            <h4 id="center_movement"></h4>
+                        </div>
+                        <div class="now_spe_box">
+                            <p>폭풍역</p>
+                            <h4 id="storm_area"></h4>
+                        </div>
+                        <div class="now_spe_box">
+                            <p>강풍역</p>
+                            <h4 id="strong_area"></h4>
+                        </div>
+                        <div class="now_spe_box">
+                            <p>중심위치</p>
+                            <h4 id="center_coord"></h4>
+                        </div>
+                        <div class="now_spe_box">
+                            <p>중심위치 정확도</p>
+                            <h4 id="center_acc"></h4>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-
+        <div class="contentBox left" id="bottom">
+            <div id="forecastBox"></div>
+        </div>
     </div>
 </body>
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script type="module" src="/drr/jp/disaster/typhoon/script.js"></script>
 <script src="/src/mainHeaders.js"></script>
 <script src="/src/tools.js"></script>
-<script type="module" src="/drr/jp/disaster/typhoon/script.js"></script>
-
+<script src="/drr/src/menubar.js"></script>
+<!-- <script type="module" src="/src/announce.js"></script> -->
 </html>

@@ -1,5 +1,5 @@
 import mon_day from '../../../../src/time.js'
-var map = L.map('map').setView([35.6, 136.7], 5);
+var map = L.map('map', { zoomControl: false }).setView([35.6, 136.7], 5);
 
 let id = ''
 const searchParams = new URLSearchParams(location.search);
@@ -13,7 +13,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 var tsunamiData, area, station
 function getTsunamiData(){
-    fetch(`http://192.168.45.190:3000/jp_tsunami?id=${id}`)
+    fetch(`http://localhost:3000/jp_tsunami?id=${id}`)
     .then(response => response.json())
     .then(data => {
         tsunamiData = data;
@@ -36,8 +36,8 @@ function getTsunamiArea(data){
         var nowData = data[i]
         tsunamiForecastArea += `${nowData.code},`
     }
-    console.log(tsunamiForecastArea.slice(0,-1))
-    fetch(`http://192.168.45.190:3000/jp_tsunamiArea?id=${tsunamiForecastArea.slice(0,-1)}`)
+    // console.log(tsunamiForecastArea.slice(0,-1))
+    fetch(`http://localhost:3000/jp_tsunamiArea?id=${tsunamiForecastArea.slice(0,-1)}`)
     .then(response => response.json())
     .then(data => {
         area = data
@@ -46,7 +46,7 @@ function getTsunamiArea(data){
     .catch(error => console.error('Error fetching weather data:', error));
 }
 function getTsunamiPara(){
-    fetch(`http://192.168.45.190:3000/jp_tsunamiPara`)
+    fetch(`http://localhost:3000/jp_tsunamiPara`)
     .then(response => response.json())
     .then(data => {
         station = data;
@@ -120,12 +120,10 @@ function getObStyle(val){
     }else if(val >= 3){
         return 'background-color: rgb(191, 0, 255); color:white;'
     }else{
-        return 'gray'
+        return 'background-color: gray'
     }
 }
 function draw(){
-    console.log(tsunamiData)
-    console.log(area)
 
     //예보
     var forecasts = tsunamiData.body.tsunami.forecasts
@@ -255,6 +253,9 @@ function draw(){
         addGeoJsonToMap(geojson, forecasts);
     });
     tsunamiObserved();
+    if(tsunamiData.body.tsunami.offsea){
+        offseaTsunamiObserved();
+    }
 
     // console.log(forecasts)
     forecasts.forEach(data => {
@@ -295,8 +296,14 @@ function draw(){
         divBox.appendChild(time);
 
         const height = document.createElement('h4');
-        height.className = 'forecastHeight'
-        height.textContent = data.maxHeight.height;
+        height.className = 'forecastHeight';
+        console.log(data.maxHeight)
+        if(data.maxHeight.height){
+            height.textContent = data.maxHeight.height;
+        }else{
+            if(data.kind != '해일주의보 해제')
+            height.textContent = '불명';
+        }
         divBox.appendChild(height);
 
         container.appendChild(divBox)
@@ -309,7 +316,7 @@ function draw(){
     }
 
     observation.forEach(data => {
-        console.log(data)
+        // console.log(data)
         var container = document.getElementById('observed')
         for(var i = 0; i < (data.stations).length; i++){
             var observationData = data.stations[i];
@@ -325,8 +332,13 @@ function draw(){
             
             var height = document.createElement('h4')
             height.className = 'observedHeight';
-            height.textContent = observationData.maxHeight.height.height;
-            height.style = `${getObStyle(observationData.maxHeight.height.height)}`
+            if(observationData.maxHeight.height.height == ''){
+                height.textContent = '--';
+                height.style = `background-color: white`
+            }else{
+                height.textContent = observationData.maxHeight.height.height;
+                height.style = `${getObStyle(observationData.maxHeight.height.height)}`
+            }
 
             if(observationData.maxHeight.height.condition != ''){
                 if(observationData.maxHeight.height.condition == '미약'){
@@ -346,10 +358,16 @@ function draw(){
             }
 
             box.appendChild(areaBox)
+            var observationTime = observationData.maxHeight.dateTime;
+            if(observationTime == ''){
+                observationTime = '식별 불능'
+            }else{
+                observationTime = mon_day(observationTime).slice(4,)
+            }
 
             var time = document.createElement('h4')
             time.className = 'forecastTime';
-            time.textContent = (mon_day(observationData.maxHeight.dateTime).slice(4,))
+            time.textContent = observationTime;
             box.appendChild(time)
 
             box.appendChild(height)
@@ -358,25 +376,27 @@ function draw(){
         }
 
     })
+
+    var offsea = tsunamiData.body.tsunami.offsea;
+    offsea.forEach(data => {
+
+    })
 }
 function getObColor(val){
     if(val < 0.2){
-        return 'rgb(0, 255, 255)'
+        return 'rgba(0, 211, 211, 1)'
     }else if(val < 1){
-        return 'rgb(255, 238, 0)'
+        return 'rgba(207, 193, 0, 1)'
     }else if(val < 3){
-        return 'rgb(217, 29, 0)'
+        return 'rgba(165, 56, 39, 1)'
     }else if(val >= 3){
-        return 'rgb(191, 0, 255)'
+        return 'rgba(159, 0, 212, 1)'
     }else{
         return 'gray'
     }
 }
 function tsunamiObserved(){
-    console.log(tsunamiData.body.tsunami.observation)
-    console.log(station)
     const observation = tsunamiData.body.tsunami.observation;
-
     observation.forEach(region => {
         region.stations.forEach(stationData => {
             const matchedStation = station.find(st => st.code === stationData.code);
@@ -445,6 +465,71 @@ function tsunamiObserved(){
                 }
             }
         });
+    });
+}
+function offseaTsunamiObserved(){
+    const observation = tsunamiData.body.tsunami.offsea;
+    console.log(observation)
+    
+    observation.forEach(region => {
+        console.log(region)
+        const matchedStation = station.find(st => st.code === region.code);
+
+        if (matchedStation) {
+            try{
+                const [latStr, lonStr] = matchedStation.latlon;
+                const lat = parseFloat(latStr);
+                const lon = parseFloat(lonStr);
+                var textHeight
+                if(region.maxHeight.height.condition == '관측중'){
+                    textHeight = '관측중'
+                }else{
+                    textHeight = region.maxHeight.height.height
+                }
+
+                const icon = L.icon({ iconUrl: './icons/Untitled.svg', iconSize: [15, 15] });
+
+                console.log(lat, lon)
+                var marker = L.marker([lat, lon], { icon: icon }).addTo(map);
+                var ar = region.firstHeight.arrivalTime
+                if(ar == ''){
+                    ar = '제1파 식별 불능'
+                }else{
+                    ar = mon_day(ar).slice(4,)
+                }
+                var mx = region.maxHeight.dateTime
+                if(mx == ''){
+                    mx = '식별 불능'
+                }else{
+                    mx = mon_day(mx).slice(4,)
+                }
+                var ini =''
+                if(region.firstHeight.initial != ''){
+                    ini = `(${region.firstHeight.initial})`
+                }
+
+                marker.bindPopup(`
+                <h4 style="font-family: 'Pretendard Variable'; text-align: center;">${region.name}</h4>
+                <table style="font-family: 'Pretendard Variable'">
+                    <tr>
+                        <th style='text-align: center;'>제1파 도달시각</th>
+                        <td>${ar} ${ini}</td>
+                    </tr>
+                    <tr>
+                        <th style='text-align: center;'>최대파 도달시각</th>
+                        <td>${mx}</td>
+                    </tr>
+                    <tr>
+                        <th style='text-align: center;'>최대파의 높이</th>
+                        <td>${textHeight}</td>
+                    </tr>
+                </table>
+            `);
+
+            }catch(error){
+                console.log(error)
+            }
+        }
     });
 }
 getTsunamiData()

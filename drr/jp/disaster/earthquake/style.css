@@ -44,6 +44,10 @@
 #forcastComment{
     white-space: pre-wrap;
 }
+#varComment{
+    white-space: pre-wrap;
+    font-size:1rem;
+}
 .lngInfo{
     font-size : 1.2rem;
     text-align: center;
@@ -88,6 +92,9 @@
 }
 .content {
     margin-bottom: 3rem;
+}
+#freeFormComment{
+    font-size: 1rem;
 }
 #earthquakeListBox table tbody tr {
     position: relative;

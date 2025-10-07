@@ -1,55 +1,17 @@
-import mon_day from '../../../../src/time.js'
-var h = window.innerHeight;
-document.getElementById('map').style.height = h - 48 + 'px'
+import mon_day, {mon_day_year} from '../../../../src/time.js'
+var map = L.map('map', { zoomControl: false }).setView([30, 140], 3);
+
 const searchParams = new URLSearchParams(location.search);
 let id = ''
 for (const param of searchParams) {
     id = param[1];
 }
-var map = L.map('map').setView([26, 140], 4);
-map.createPane('labels');
-map.getPane('labels').style.zIndex = 650;
-map.getPane('labels').style.pointerEvents = 'none';
-function getNearest5MinuteUTC() {
-    const now = new Date();
-    now.setUTCMinutes(now.getUTCMinutes() - 5);
-    
-    const utcMinutes = now.getUTCMinutes();
-    const utcHours = now.getUTCHours();
-    const utcYear = now.getUTCFullYear();
-    const utcMonth = now.getUTCMonth();
-    const utcDate = now.getUTCDate();
-
-    // 5분 단위로 조정합니다.
-    const roundedMinutes = Math.floor(utcMinutes / 5) * 5;
-
-    const adjustedDate = new Date(Date.UTC(
-        utcYear,
-        utcMonth,
-        utcDate,
-        utcHours,
-        roundedMinutes
-    ));
-
-    const year = adjustedDate.getUTCFullYear();
-    const month = String(adjustedDate.getUTCMonth() + 1).padStart(2, '0');
-    const day = String(adjustedDate.getUTCDate()).padStart(2, '0');
-    const hour = String(adjustedDate.getUTCHours()).padStart(2, '0');
-    const minute = String(adjustedDate.getUTCMinutes()).padStart(2, '0');
-    const second = String(adjustedDate.getUTCSeconds()).padStart(2, '0');
-
-    return `${year}${month}${day}${hour}${minute}${second}`;
-}
-
-var url = `https://www.jma.go.jp/bosai/jmatile/data/nowc/${getNearest5MinuteUTC()}/none/${getNearest5MinuteUTC()}/surf/hrpns/{z}/{x}/{y}.png`
-var rainLayer = L.tileLayer(url, {
-    maxZoom: 10,
-    pane: 'labels',
-});
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 10,
-    attribution: '© OpenStreetMap, © 気象庁(일본 기상청)',
+    maxZoom: 8,
+    minZoom: 3,
+    attribution: `© OpenStreetMap, © <span class="jp">気象庁</span>(일본 기상청)`
 }).addTo(map);
+
 function getCoordinate(cord) {
     var centerCord
     if (cord.length == 12) {
@@ -58,7 +20,28 @@ function getCoordinate(cord) {
         centerCord = [cord.slice(1, 4), cord.slice(5, -1)]
     }
     return centerCord
+};
+function toHalfWidth(str) {
+    return str.replace(/[Ａ-Ｚａ-ｚ０-９]/g, function(s) {
+        return String.fromCharCode(s.charCodeAt(0) - 0xFEE0);
+    });
 }
+var now_typhoon_center = L.icon({
+    iconUrl: '/drr/jp/disaster/typhoon_past/typhoon.svg',
+    iconSize: [25, 25]
+});
+
+
+function toggleCircleVisibility(circle) {
+    var radius = circle.getRadius();
+
+    if (radius < 100) {
+        circle.setStyle({ opacity: 0, fillOpacity: 0 });
+    } else {
+        circle.setStyle({ opacity: 1, fillOpacity: 0.2 });
+    }
+};
+
 function calculateNewCoords(lat, lon, distance, direction) {
     const R = 6371;
 
@@ -88,8 +71,7 @@ function calculateNewCoords(lat, lon, distance, direction) {
     const newLon = newLonRad * 180 / Math.PI;
 
     return [newLat, newLon];
-}
-
+};
 function calculateCircleParams(directions, distances, center) {
     var distancesNum = distances.map(Number);
     var centerLat = Number(center[0]);
@@ -105,289 +87,280 @@ function calculateCircleParams(directions, distances, center) {
         center: [newCenterLat, newCenterLon],
         radius: averageDistance * 1000
     };
-}
-function toggleCircleVisibility(circle) {
-    var radius = circle.getRadius();
+};
+const typhoonLayers = {
+    windCircles: [],
+    forecast: [],
+    warningCircles: [],
+    centerLines: [],
+    centerDots: [],
+    divIcons: []
+};
+const suiteiLayers = []
 
-    if (radius < 100) {
-        circle.setStyle({ opacity: 0, fillOpacity: 0 });
+function toggleLayerGroup(layers, suiteiLayers) {
+    if (layers.length === 0) return;
+
+    if (map.hasLayer(layers[0])) {
+        layers.forEach(layer => map.removeLayer(layer));
+        suiteiLayers.forEach(layer => layer.addTo(map));
     } else {
-        circle.setStyle({ opacity: 1, fillOpacity: 0.2 });
+        layers.forEach(layer => layer.addTo(map));
+        suiteiLayers.forEach(layer => map.removeLayer(layer));
     }
 }
+function mapDraw(data) {
+    const centerCoord = getCoordinate(data.body.info.now.center.coordinate);
 
-function getSize(size) {
-    if (size == '대형') {
-        document.getElementById('now_size').style = 'display:block; background-color: red; color: white;';
-        document.getElementById('now_size').textContent = '대형'
-    } else if (size == '초대형') {
-        document.getElementById('now_size').style = 'display:block; background-color: rgb(195, 0, 255); color: white';
-        document.getElementById('now_size').textContent = '초대형'
-    } else {
-        document.getElementById('now_size').style = 'display:none;'
+    var mark = L.marker(centerCoord, { icon: now_typhoon_center }).addTo(map);
+    typhoonLayers.divIcons.push(mark);
+    function createWindCircle(color, fillColor, directions, distances, centerWind) {
+        const { center, radius } = calculateCircleParams(directions, distances, centerWind);
+        const circle = L.circle(center, {
+            color,
+            fillColor,
+            radius
+        }).addTo(map);
+
+        toggleCircleVisibility(circle);
+
+        // 팝업 이벤트 바인딩
+        circle.on('click', () => {
+            const popupContent = `
+                <div>
+                    <p style="font-family: 'Pretendard Variable'; text-align: center; font-weight:bold; font-size:1rem; margin:0">
+                        ${data.body.info.now.classification.category} - ${data.body.typhoon.name.text}
+                    </p>
+                    <p style="font-family: 'Pretendard Variable'; text-align: center; font-size:0.8rem; margin:-5px">
+                        ${mon_day(data.body.info.now.dateTime).slice(3, -3)} 현재
+                    </p>
+                    <table style="font-family: 'Pretendard Variable'">
+                        <tr>
+                            <th style='text-align: center;'>중심기압</th>
+                            <td>${data.body.info.now.center.pressure}hPa</td>
+                        </tr>
+                        <tr>
+                            <th style='text-align: center;'>최대풍속</th>
+                            <td>${data.body.info.now.wind.average}m/s</td>
+                        </tr>
+                        <tr>
+                            <th style='text-align: center;'>최대순간풍속</th>
+                            <td>${data.body.info.now.wind.instantaneous}m/s</td>
+                        </tr>
+                    </table>
+                </div>
+            `;
+            L.popup()
+                .setLatLng(centerCoord)
+                .setContent(popupContent)
+                .openOn(map);
+        });
+        typhoonLayers.windCircles.push(circle);
+
+        return circle;
     }
-}
 
-function getStrength(str) {
-    if (str == '강') {
-        document.getElementById('now_strength').style = 'display:block; background-color: yellow; color:black'
-        document.getElementById('now_strength').textContent = '강'
-    } else if (str == '매우강') {
-        document.getElementById('now_strength').style = 'display:block; background-color: red; color: white;';
-        document.getElementById('now_strength').textContent = '매우강'
-    } else if (str == '맹렬한') {
-        document.getElementById('now_strength').style = 'display:block; background-color: rgb(195,0,255); color:white';
-        document.getElementById('now_strength').textContent = '맹렬한'
-    } else {
-        document.getElementById('now_strength').style = 'display:none'
-    }
-}
+    createWindCircle(
+        'yellow',
+        '#ffff00e6',
+        data.body.info.now.wind.area.strong.direction,
+        data.body.info.now.wind.area.strong.radius,
+        centerCoord
+    );
 
-var now_typhoon_center = L.icon({
-    iconUrl: '/drr/jp/disaster/typhoon/typhoon.svg',
-    iconSize: [25, 25]
-})
+    createWindCircle(
+        'red',
+        '#ff0000e6',
+        data.body.info.now.wind.area.storm.direction,
+        data.body.info.now.wind.area.storm.radius,
+        centerCoord
+    );
 
-const centerLines = [];
-function draw(nowData) {
-    //현재
-    const nowCenter = L.marker(getCoordinate(nowData.body.info.now.center.coordinate), { icon: now_typhoon_center }).addTo(map);
+    let forecastLines = [];
+    function mapForecast(data) {
+        const forecasts = data.body.info.forecast;
 
-    //강풍역
-    var yellow_directions = nowData.body.info.now.wind.area.strong.direction;
-    var yellow_distances = nowData.body.info.now.wind.area.strong.radius;
-    var yellow_center = getCoordinate(nowData.body.info.now.center.coordinate);
-    var yellow_data = calculateCircleParams(yellow_directions, yellow_distances, yellow_center);
-    var yellow_circleCenter = yellow_data.center
-    var yellow_radius = yellow_data.radius
-    const yellow_circle = L.circle(yellow_circleCenter, {
-        color: 'yellow',
-        fillColor: '#ffff00e6',
-        radius: yellow_radius
-    }).addTo(map);
-    toggleCircleVisibility(yellow_circle)
+        // 공통 팝업 생성 함수
+        function bindPopup(layer, forecastData, coordinates, label) {
+            layer.on('click', () => {
+                const popupContent = `
+                <div>
+                    <p style="font-family: 'Pretendard Variable'; text-align: center; font-weight:bold; font-size:1rem; margin:0">
+                        ${forecastData.classification.category}
+                    </p>
+                    <p style="font-family: 'Pretendard Variable'; text-align: center; font-size:0.8rem; margin:-5px">
+                        ${mon_day(forecastData.dateTime).slice(3, -3)} ${label}
+                    </p>
+                    <table style="font-family: 'Pretendard Variable'">
+                        <tr>
+                            <th style='text-align: center;'>중심기압</th>
+                            <td>${forecastData.center.pressure}hPa</td>
+                        </tr>
+                        <tr>
+                            <th style='text-align: center;'>최대풍속</th>
+                            <td>${forecastData.wind.average}m/s</td>
+                        </tr>
+                        <tr>
+                            <th style='text-align: center;'>최대순간풍속</th>
+                            <td>${forecastData.wind.instantaneous}m/s</td>
+                        </tr>
+                    </table>
+                </div>
+            `;
+                L.popup()
+                    .setLatLng(coordinates)
+                    .setContent(popupContent)
+                    .openOn(map);
+            });
+        }
 
-    //폭풍역
-    var red_directions = nowData.body.info.now.wind.area.storm.direction;
-    var red_distances = nowData.body.info.now.wind.area.storm.radius;
-    var red_center = getCoordinate(nowData.body.info.now.center.coordinate);
-    var red_data = calculateCircleParams(red_directions, red_distances, red_center);
-    var red_circleCenter = red_data.center
-    var red_radius = red_data.radius
-    const red_circle = L.circle(red_circleCenter, {
-        color: 'red',
-        fillColor: '#ff0000e6',
-        radius: red_radius
-    }).addTo(map);
-    toggleCircleVisibility(red_circle)
+        for (let j = forecasts.length - 1; j >= 0; j--) {
+            const forecastData = forecasts[j];
+            if (forecastData.isSuitei){
+                console.log('asdfadf')
+                console.log(forecastData)
+                const suiteiCoordinates = getCoordinate(forecastData.center.coordinate);
+                var mark = L.marker(suiteiCoordinates, { icon: now_typhoon_center }).addTo(map);
+                suiteiLayers.push(mark);
 
-    yellow_circle.on('click', function() {
-        var popupContent = `
-            <div>
-                <p style="font-family: 'Pretendard Variable'; text-align: center; font-weight:bold; font-size:1rem; margin:0">${nowData.body.info.now.classification.category}</p>
-                <p style="font-family: 'Pretendard Variable'; text-align: center;font-size:0.8rem; margin: -5px">${mon_day(nowData.body.info.now.dateTime).slice(3, -3)} 현재</p>
-                <table style="font-family: 'Pretendard Variable'">
-                    <tr>
-                        <th style='text-align: center;'>중심기압</th>
-                        <td>${nowData.body.info.now.center.pressure}hPa</td>
-                    </tr>
-                    <tr>
-                        <th style='text-align: center;'>최대풍속</th>
-                        <td>${nowData.body.info.now.wind.average}m/s</td>
-                    </tr>
-                    <tr>
-                        <th style='text-align: center;'>최대순간풍속</th>
-                        <td>${nowData.body.info.now.wind.instantaneous}m/s</td>
-                    </tr>
-                </table>
-            </div>
-        `;
-        var popup = L.popup()
-            .setLatLng(getCoordinate(nowData.body.info.now.center.coordinate))  // 원의 중심에 팝업 표시
-            .setContent(popupContent)
-            .openOn(map);
-    });
-    red_circle.on('click', function() {
-        var popupContent = `
-            <div>
-                <p style="font-family: 'Pretendard Variable'; text-align: center; font-weight:bold; font-size:1rem; margin:0">${nowData.body.info.now.classification.category}</p>
-                <p style="font-family: 'Pretendard Variable'; text-align: center;font-size:0.8rem; margin: -5px">${mon_day(nowData.body.info.now.dateTime).slice(3, -3)} 현재</p>
-                <table style="font-family: 'Pretendard Variable'">
-                    <tr>
-                        <th style='text-align: center;'>중심기압</th>
-                        <td>${nowData.body.info.now.center.pressure}hPa</td>
-                    </tr>
-                    <tr>
-                        <th style='text-align: center;'>최대풍속</th>
-                        <td>${nowData.body.info.now.wind.average}m/s</td>
-                    </tr>
-                    <tr>
-                        <th style='text-align: center;'>최대순간풍속</th>
-                        <td>${nowData.body.info.now.wind.instantaneous}m/s</td>
-                    </tr>
-                </table>
-            </div>
-        `;
-        var popup = L.popup()
-            .setLatLng(getCoordinate(nowData.body.info.now.center.coordinate))  // 원의 중심에 팝업 표시
-            .setContent(popupContent)
-            .openOn(map);
-    });
-    //예보
-    var forecastLines =[]
-    for (var j = (nowData.body.info.forecast).length - 1; j >= 0; j--) {
-        let forecastData = nowData.body.info.forecast[j];  // let을 사용해 각 반복마다 새로운 블록 스코프를 생성
-        if (forecastData.isSuitei == false) {
-            let forecastCoordinates = getCoordinate(forecastData.center.probabilityCircle.baseCordinate);  // let 사용
+                var suiwind = createWindCircle(
+                    'yellow',
+                    '#ffff00e6',
+                    forecastData.wind.area.strong.direction,
+                    forecastData.wind.area.strong.radius,
+                    getCoordinate(forecastData.center.coordinate)
+                );
+                var suistorm = createWindCircle(
+                    'red',
+                    '#ff0000e6',
+                    forecastData.wind.area.storm.direction,
+                    forecastData.wind.area.storm.radius,
+                    getCoordinate(forecastData.center.coordinate)
+                )
+                suiteiLayers.push(suiwind);
+                suiteiLayers.push(suistorm);
+
+                suiteiLayers.forEach(layer => map.removeLayer(layer));
+
+                continue;
+            }
+
+            const forecastCoordinates = getCoordinate(forecastData.center.probabilityCircle.baseCoordinate);
             forecastLines.push(forecastCoordinates);
-    
-            const posibility_Circle = L.circle(forecastCoordinates, {
+
+            const posibilityCircle = L.circle(forecastCoordinates, {
                 color: 'white',
                 weight: 3,
                 fillColor: '#00ff0000',
                 radius: forecastData.center.probabilityCircle.radius * 1000
             }).addTo(map);
 
-            posibility_Circle.on('click', function() {
-                var popupContent = `
-                    <div>
-                        <p style="font-family: 'Pretendard Variable'; text-align: center; font-weight:bold; font-size:1rem; margin:0">${forecastData.classification.category}</p>
-                        <p style="font-family: 'Pretendard Variable'; text-align: center;font-size:0.8rem; margin: -5px">${mon_day(forecastData.dateTime).slice(3, -3)} 예보</p>
-                        <table style="font-family: 'Pretendard Variable'">
-                        <tr>
-                            <th style='text-align: center;'>중심기압</th>
-                            <td>${forecastData.center.pressure}hPa</td>
-                        </tr>
-                        <tr>
-                            <th style='text-align: center;'>최대풍속</th>
-                            <td>${forecastData.wind.average}m/s</td>
-                        </tr>
-                        <tr>
-                            <th style='text-align: center;'>최대순간풍속</th>
-                            <td>${forecastData.wind.instantaneous}m/s</td>
-                        </tr>
-                    </table>
-                    </div>
-                `;
-                var popup = L.popup()
-                    .setLatLng(forecastCoordinates)  // 원의 중심에 팝업 표시
-                    .setContent(popupContent)
-                    .openOn(map);
-            });
-    
-            var yohoTimeIcon = L.divIcon({
+            bindPopup(posibilityCircle, forecastData, forecastCoordinates, "예보");
+
+            
+            typhoonLayers.forecast.push(posibilityCircle);
+
+            const yohoTimeIcon = L.divIcon({
                 className: 'yoho_time_icon',
-                html: `<div class="yoho_time_icon_label" style="font-family: 'Pretendard Variable';width:max-content; margin-left: -25px;">${mon_day(forecastData.dateTime).slice(3, -3)} 예보</div>`
+                html: `<div class="yoho_time_icon_label" style="font-family: 'Pretendard Variable';width:max-content; margin-left: -25px;">
+                       ${mon_day(forecastData.dateTime).slice(3, -3)} 예보
+                   </div>`
             });
-            var [lat, lon] = forecastCoordinates;
-            L.marker([parseFloat(lat) - 0.1, lon], { icon: yohoTimeIcon }).addTo(map);
-    
-            // 폭풍 경계역
-            var warning_directions = forecastData.wind.area.stormWarning.direction;
-            var warning_distances = forecastData.wind.area.stormWarning.radius;
-            var warning_center = forecastCoordinates;
-            var warning_data = calculateCircleParams(warning_directions, warning_distances, warning_center);
-            var warning_circleCenter = warning_data.center;
-            // var warning_radius = parseInt(warning_data.radius) - (parseInt(forecastData.center.probabilityCircle.radius)*1000);
-            var warning_radius = warning_data.radius;
-    
-            const warning_circle = L.circle(warning_circleCenter, {
+            const [lat, lon] = forecastCoordinates;
+            var divIcon = L.marker([parseFloat(lat) - 0.1, lon], { icon: yohoTimeIcon }).addTo(map);
+            typhoonLayers.divIcons.push(divIcon);
+
+            // ---------------------------
+            // 3. 폭풍 경계 원
+            // ---------------------------
+            const { center: warningCenter, radius: warningRadius } = calculateCircleParams(
+                forecastData.wind.area.stormWarning.direction,
+                forecastData.wind.area.stormWarning.radius,
+                forecastCoordinates
+            );
+
+            const warningCircle = L.circle(warningCenter, {
                 color: 'red',
                 fillColor: '#00ff0000',
-                radius: warning_radius
+                radius: warningRadius
             }).addTo(map);
-    
-            toggleCircleVisibility(warning_circle);
-            warning_circle.on('click', function() {
-                var popupContent = `
-                    <div>
-                        <p style="font-family: 'Pretendard Variable'; text-align: center; font-weight:bold; font-size:1rem; margin:0">${forecastData.classification.category}</p>
-                        <p style="font-family: 'Pretendard Variable'; text-align: center;font-size:0.8rem; margin: -5px">${mon_day(forecastData.dateTime).slice(3, -3)} 예보</p>
-                        <table style="font-family: 'Pretendard Variable'">
-                        <tr>
-                            <th style='text-align: center;'>중심기압</th>
-                            <td>${forecastData.center.pressure}hPa</td>
-                        </tr>
-                        <tr>
-                            <th style='text-align: center;'>최대풍속</th>
-                            <td>${forecastData.wind.average}m/s</td>
-                        </tr>
-                        <tr>
-                            <th style='text-align: center;'>최대순간풍속</th>
-                            <td>${forecastData.wind.instantaneous}m/s</td>
-                        </tr>
-                    </table>
-                    </div>
-                `;
-                var popup = L.popup()
-                    .setLatLng(forecastCoordinates)  // 원의 중심에 팝업 표시
-                    .setContent(popupContent)
-                    .openOn(map);
-            });
+            typhoonLayers.warningCircles.push(warningCircle); 
+
+            toggleCircleVisibility(warningCircle);
+            bindPopup(warningCircle, forecastData, forecastCoordinates, "예보");
         }
     }
-
-    //과거 경로
+    mapForecast(data);
     try {
-        const latlngs = [];
+        function mapPast(data) {
+            const pastInfo = data.body.info.past;
 
-        for (var i = 0; i < nowData.body.info.past.length; i++) {
-            const data = nowData.body.info.past[i];
-            const latlng = getCoordinate(data.coord);
-            latlngs.push(latlng);
-        }
+            // 1. 과거 좌표 경로 라인
+            const latlngs = pastInfo.map(p => getCoordinate(p.coord));
+            L.polyline(latlngs, { color: 'blue', weight: 2 }).addTo(map);
 
-        const centerLine = L.polyline(latlngs, { color: 'blue', weight: 2 }).addTo(map);
-
-        for (var i = 0; i < (nowData.body.info.past).length - 1; i++) {
-            var data = nowData.body.info.past[i];
-            const latlng = getCoordinate(data.coord);
-            var color;
-            if (data.str == '맹렬한') {
-                color = 'rgb(195,0,255)';
-            } else if (data.str == '매우강') {
-                color = 'red';
-            } else if (data.str == '강') {
-                color = 'yellow';
-            } else {
-                color = 'blue';
+            // 2. 강도(str) → 색상 매핑 함수
+            function getColor(pastData) {
+                switch (pastData.str) {
+                    case '맹렬한': return 'rgb(195,0,255)';
+                    case '매우강': return 'red';
+                    case '강': return 'yellow';
+                    default:
+                        const windValue = parseInt(pastData.maxwind.slice(0, 2));
+                        if (isNaN(windValue) || windValue < 18 || pastData.maxwind === 'm/s') {
+                            return 'rgb(131, 131, 131)';
+                        }
+                        return 'white';
+                }
             }
 
-            const circle = L.circle(latlng, {
-                color: color,
-                fillOpacity: 1,
-                radius: 1000
-            }).addTo(map);
+            // 3. 팝업 HTML 생성 함수
+            function createPopup(pastData) {
+                return `
+                    <div>
+                        <p style="font-family: 'Pretendard Variable'; text-align: center; font-weight:bold; margin:0; font-size:0.9rem;">
+                            ${mon_day(pastData.time)}
+                        </p>
+                        <table style="font-family: 'Pretendard Variable'">
+                            <tr>
+                                <th style='text-align: center;'>종류</th>
+                                <td>${pastData.class}</td>
+                            </tr>
+                            <tr>
+                                <th style='text-align: center;'>중심기압</th>
+                                <td>${pastData.press}</td>
+                            </tr>
+                            <tr>
+                                <th style='text-align: center;'>최대풍속</th>
+                                <td>${pastData.maxwind}</td>
+                            </tr>
+                            <tr>
+                                <th style='text-align: center;'>강도</th>
+                                <td>${pastData.str}</td>
+                            </tr>
+                        </table>
+                    </div>
+                `;
+            }
 
-            circle.bindPopup(`
-                <div>
-                    <p style="font-family: 'Pretendard Variable'; text-align: center; font-weight:bold; margin:0; font-size:0.9rem;">${mon_day(data.time)}</p>
-                    <table style="font-family: 'Pretendard Variable'">
-                    <tr>
-                        <th style='text-align: center;'>종류</th>
-                        <td>${data.class}</td>
-                    </tr>
-                    <tr>
-                        <th style='text-align: center;'>중심기압</th>
-                        <td>${data.press}</td>
-                    </tr>
-                    <tr>
-                        <th style='text-align: center;'>최대풍속</th>
-                        <td>${data.maxwind}</td>
-                    </tr>
-                    <tr>
-                        <th style='text-align: center;'>강도</th>
-                        <td>${data.str}</td>
-                    </tr>
-                </table>
-                </div>
-            `)
-            .setLatLng(latlng);
+            // 4. 각 지점에 원 추가 + 팝업 바인딩
+            pastInfo.slice(0, -1).forEach(pastData => {
+                const latlng = getCoordinate(pastData.coord);
+                const circle = L.circle(latlng, {
+                    color: getColor(pastData),
+                    fillOpacity: 1,
+                    radius: 1000
+                }).addTo(map);
+
+                circle.bindPopup(createPopup(pastData)).setLatLng(latlng);
+            });
         }
+        mapPast(data)
     }catch(error){
-        var pastCen = (nowData.body.info.past).map(getCoordinate)
-        const centerLine = L.polyline(pastCen, { color: 'blue', weight: 2 }).addTo(map)
-        centerLines.push(centerLine);
+        var lines=[]
+        var pastCen = (data.body.info.past).map(getCoordinate)
+        var line = L.polyline(pastCen, { color: 'blue', weight: 2 }).addTo(map)
+        lines.push(line);
     
         pastCen.pop();
         pastCen.forEach(function (coord) {
@@ -399,360 +372,258 @@ function draw(nowData) {
         });
         console.log('태풍정보 v1.0.0 버전입니다. 태풍 경로 정보에 미대응.')
     }
-
-
-    forecastLines.push(getCoordinate(nowData.body.info.now.center.coordinate))
+    
+    const centerLines = [];
+    forecastLines.push(getCoordinate(data.body.info.now.center.coordinate))
     const forecastLine = L.polyline(forecastLines, { color: 'white', dashArray: '5, 5', dashOffset: '0', weight: 2 }).addTo(map);
     centerLines.push(forecastLine)
     forecastLines.slice(0,-1).forEach(function (coord) {
-        L.circle(coord, {
+        var centerDot = L.circle(coord, {
             color: 'white',
             fillColor: 'white',
             fillOpacity: 1,
             radius: 1000
         }).addTo(map);
+        typhoonLayers.centerDots.push(centerDot);
+        typhoonLayers.centerLines.push(forecastLine);
     });
-    var bounds = L.latLngBounds();
-    centerLines.forEach(line => {
-        line.getLatLngs().forEach(latlng => bounds.extend(latlng));
+    
+    const toggleBtn = document.getElementById("suiteiON");
+
+    // 버튼 클릭 이벤트 등록
+    toggleBtn.addEventListener("click", () => {
+        toggleLayerGroup([
+            ...typhoonLayers.windCircles,
+            ...typhoonLayers.forecast,
+            ...typhoonLayers.warningCircles,
+            ...typhoonLayers.centerLines,
+            ...typhoonLayers.centerDots,
+            ...typhoonLayers.divIcons
+        ], suiteiLayers);
     });
-
-    // 지도를 경계에 맞게 조정
-    map.fitBounds(bounds);
 }
-function area_check(data) {
-    // console.log(data)
-    if (data.radius[0] == '') {
-        return '--'
-    } else if (data.radius[0] == data.radius[1]) {
-        return `반경 ${data.radius[0]}km`
-    } else {
-        return `${data.direction[0]}쪽 ${data.radius[0]}km\n${data.direction[1]}쪽 ${data.radius[1]}km`
-    }
-}
-function info(nowData) {
-    document.getElementById('spe').style.display = 'block'
-    var num = nowData.body.typhoon.name.number;
-    if (num == '') {
-        document.getElementById('typNum').style.display = 'none'
-    }
-    document.getElementById('typNum').textContent = `20${(nowData.body.typhoon.name.number).slice(0, 2)}년 제${(nowData.body.typhoon.name.number).slice(2,)}호 태풍`
-    document.getElementById('typName').textContent = nowData.body.typhoon.name.text;
-    document.getElementById('reportTime').textContent = mon_day(nowData.reportDateTime) + ' 발표';
-
-    document.getElementById('remark').textContent = nowData.body.typhoon.remark;
-    document.getElementById('now_time').textContent = mon_day(nowData.body.info.now.dateTime) + ' 현재';
-    document.getElementById('now_class').textContent = nowData.body.info.now.classification.category;
-    getSize(nowData.body.info.now.classification.size)
-    getStrength(nowData.body.info.now.classification.intensity);
-    document.getElementById('center_hpa').textContent = nowData.body.info.now.center.pressure;
-    document.getElementById('center_max_wind_speed').textContent = nowData.body.info.now.wind.average;
-    document.getElementById('acc').textContent = nowData.body.info.now.center.condition;
-    document.getElementById('center_max_shun_wind_speed').textContent = nowData.body.info.now.wind.instantaneous + ' m/s';
-    document.getElementById('mov_dir').textContent = nowData.body.info.now.center.movement.direction;
-    var movspd = nowData.body.info.now.center.movement.speed;
-    if (movspd == '느림' || movspd == "거의 정체") {
-        document.getElementById('mov_tan').style.display = 'none'
-    }
-    document.getElementById('mov_spd').textContent = movspd;
-    document.getElementById('strong_area').textContent = area_check(nowData.body.info.now.wind.area.strong)
-    document.getElementById('storm_area').textContent = area_check(nowData.body.info.now.wind.area.storm)
-
-    const container = document.getElementById('infoBox');
-    for (var i = 0; i < (nowData.body.info.forecast).length; i++) {
-        var data = nowData.body.info.forecast[i];
-        if (data.isSuitei == false) {
-            const divelement = document.createElement('div');
-            divelement.className = 'yoho_box';
-
-            const nowClass = document.createElement('h4');
-            nowClass.textContent = data.classification.category;
-            nowClass.className = 'now_class';
-            divelement.appendChild(nowClass);
-
-            const nowTime = document.createElement('p');
-            nowTime.textContent = mon_day(data.dateTime) + ' 예보';
-            nowTime.className = 'now_time';
-            divelement.appendChild(nowTime);
-
-            const divBox = document.createElement('div');
-            divBox.className = 'under';
-
-            const divHPa = document.createElement('div');
-            divHPa.className = 'under_box';
-            const titleHPa = document.createElement('p');
-            titleHPa.textContent = '중심기압';
-            divHPa.appendChild(titleHPa);
-            const infoHPa = document.createElement('h4');
-            infoHPa.textContent = data.center.pressure + ' hPa'
-            divHPa.appendChild(infoHPa)
-            divBox.appendChild(divHPa)
-
-            const divMaxWind = document.createElement('div');
-            divMaxWind.className = 'under_box';
-            const titleMaxWind = document.createElement('p');
-            titleMaxWind.textContent = '최대풍속';
-            divMaxWind.appendChild(titleMaxWind);
-            const infoMaxWind = document.createElement('h4');
-            infoMaxWind.textContent = data.wind.average + ' m/s'
-            divMaxWind.appendChild(infoMaxWind)
-            divBox.appendChild(divMaxWind)
-
-            const divInt = document.createElement('div');
-            divInt.className = 'under_box';
-            const titleInt = document.createElement('p');
-            titleInt.textContent = '강도';
-            divInt.appendChild(titleInt);
-            const infoInt = document.createElement('h4');
-            var int = data.classification.intensity;
-            if (int == '') {
-                int = '--'
-            }
-            infoInt.textContent = int
-            divInt.appendChild(infoInt)
-            divBox.appendChild(divInt)
-
-            const divInsWind = document.createElement('div');
-            divInsWind.className = 'under_box';
-            const titleInsWind = document.createElement('p');
-            titleInsWind.textContent = '최대순간풍속';
-            divInsWind.appendChild(titleInsWind);
-            const infoInsWind = document.createElement('h4');
-            infoInsWind.textContent = data.wind.instantaneous + ' m/s'
-            divInsWind.appendChild(infoInsWind)
-            divBox.appendChild(divInsWind)
-
-            const divMove = document.createElement('div');
-            divMove.className = 'under_box';
-            const titleMove = document.createElement('p');
-            titleMove.textContent = '이동방향';
-            divMove.appendChild(titleMove);
-            const infoMove = document.createElement('h4');
-            infoMove.textContent = data.center.movement.direction
-            divMove.appendChild(infoMove)
-            divBox.appendChild(divMove)
-
-            const divSpd = document.createElement('div');
-            divSpd.className = 'under_box';
-            const titleSpd = document.createElement('p');
-            titleSpd.textContent = '이동속도';
-            divSpd.appendChild(titleSpd);
-            const infoSpd = document.createElement('h4');
-            var spd = data.center.movement.speed
-            if (spd == '느림' || spd == '거의 정체') { } else {
-                spd = spd + ' km/h'
-            }
-            infoSpd.textContent = spd
-            divSpd.appendChild(infoSpd)
-            divBox.appendChild(divSpd)
-
-            const divCir = document.createElement('div');
-            divCir.className = 'under_box';
-            const titleCir = document.createElement('p');
-            titleCir.textContent = '예보원 반경';
-            divCir.appendChild(titleCir);
-            const infoCir = document.createElement('h4');
-            infoCir.textContent = '반경 ' + data.center.probabilityCircle.radius + ' km'
-            divCir.appendChild(infoCir)
-            divBox.appendChild(divCir)
-
-            const divWarn = document.createElement('div');
-            divWarn.className = 'under_box';
-            const titleWarn = document.createElement('p');
-            titleWarn.textContent = '폭풍경계역';
-            divWarn.appendChild(titleWarn);
-            const infoWarn = document.createElement('h4');
-            infoWarn.textContent = area_check(data.wind.area.stormWarning)
-            divWarn.appendChild(infoWarn)
-            divBox.appendChild(divWarn)
-
-
-            divelement.appendChild(divBox)
-
-            container.append(divelement)
-        } else {
-            const divelement = document.createElement('div');
-            divelement.className = 'yoho_box';
-
-            const nowClass = document.createElement('h4');
-            nowClass.textContent = data.classification.category;
-            nowClass.className = 'now_class';
-            divelement.appendChild(nowClass);
-
-            const nowTime = document.createElement('p');
-            nowTime.textContent = mon_day(data.dateTime) + ' 추정';
-            nowTime.className = 'now_time';
-            divelement.appendChild(nowTime);
-
-            const divBox = document.createElement('div');
-            divBox.className = 'under';
-
-            const divHPa = document.createElement('div');
-            divHPa.className = 'under_box';
-            const titleHPa = document.createElement('p');
-            titleHPa.textContent = '중심기압';
-            divHPa.appendChild(titleHPa);
-            const infoHPa = document.createElement('h4');
-            infoHPa.textContent = data.center.pressure + ' hPa'
-            divHPa.appendChild(infoHPa)
-            divBox.appendChild(divHPa)
-
-            const divMaxWind = document.createElement('div');
-            divMaxWind.className = 'under_box';
-            const titleMaxWind = document.createElement('p');
-            titleMaxWind.textContent = '최대풍속';
-            divMaxWind.appendChild(titleMaxWind);
-            const infoMaxWind = document.createElement('h4');
-            infoMaxWind.textContent = data.wind.average + ' m/s'
-            divMaxWind.appendChild(infoMaxWind)
-            divBox.appendChild(divMaxWind)
-
-            const divInt = document.createElement('div');
-            divInt.className = 'under_box';
-            const titleInt = document.createElement('p');
-            titleInt.textContent = '강도';
-            divInt.appendChild(titleInt);
-            const infoInt = document.createElement('h4');
-            var int = data.classification.intensity;
-            if (int == '') {
-                int = '--'
-            }
-            infoInt.textContent = int
-            divInt.appendChild(infoInt)
-            divBox.appendChild(divInt)
-
-            const divInsWind = document.createElement('div');
-            divInsWind.className = 'under_box';
-            const titleInsWind = document.createElement('p');
-            titleInsWind.textContent = '최대순간풍속';
-            divInsWind.appendChild(titleInsWind);
-            const infoInsWind = document.createElement('h4');
-            infoInsWind.textContent = data.wind.instantaneous + ' m/s'
-            divInsWind.appendChild(infoInsWind)
-            divBox.appendChild(divInsWind)
-
-            const divMove = document.createElement('div');
-            divMove.className = 'under_box';
-            const titleMove = document.createElement('p');
-            titleMove.textContent = '이동방향';
-            divMove.appendChild(titleMove);
-            const infoMove = document.createElement('h4');
-            infoMove.textContent = data.center.movement.direction
-            divMove.appendChild(infoMove)
-            divBox.appendChild(divMove)
-
-            const divSpd = document.createElement('div');
-            divSpd.className = 'under_box';
-            const titleSpd = document.createElement('p');
-            titleSpd.textContent = '이동속도';
-            divSpd.appendChild(titleSpd);
-            const infoSpd = document.createElement('h4');
-            var spd = data.center.movement.speed
-            if (spd == '느림' || spd == '거의 정체') { } else {
-                spd = spd + ' km/h'
-            }
-            infoSpd.textContent = spd
-            divSpd.appendChild(infoSpd)
-            divBox.appendChild(divSpd)
-
-            const divCir = document.createElement('div');
-            divCir.className = 'under_box';
-            const titleCir = document.createElement('p');
-            titleCir.textContent = '강풍역';
-            divCir.appendChild(titleCir);
-            const infoCir = document.createElement('h4');
-            infoCir.textContent = area_check(data.wind.area.strong)
-            divCir.appendChild(infoCir)
-            divBox.appendChild(divCir)
-
-            const divWarn = document.createElement('div');
-            divWarn.className = 'under_box';
-            const titleWarn = document.createElement('p');
-            titleWarn.textContent = '폭풍역';
-            divWarn.appendChild(titleWarn);
-            const infoWarn = document.createElement('h4');
-            infoWarn.textContent = area_check(data.wind.area.storm)
-            divWarn.appendChild(infoWarn)
-            divBox.appendChild(divWarn)
-
-
-            divelement.appendChild(divBox)
-
-            container.append(divelement)
+function info(data){
+    function getSize(size){
+        var box = document.getElementById('now_size');
+        switch(size){
+            case '대형':
+                box.style = 'display:block; background-color: red; color: white;';
+                box.textContent = '대형';
+                break;
+            case '초대형':
+                box.style = 'display:block; background-color: rgb(195, 0, 255); color: white';
+                box.textContent = '초대형';
+                break;
+            default:
+                box.style = 'display:none';
         }
     }
-}
-var click = 0
-document.getElementById('spe').addEventListener('click', function () {
-    click += 1
-    if (click % 2 == 1) {
-        document.getElementById('infoBox').style.display = 'block'
-        document.getElementById('spe').textContent = '숨기기'
-    } else {
-        document.getElementById('infoBox').style.display = 'none'
-        document.getElementById('spe').textContent = '상세보기'
+    function getStrength(str){
+        var box = document.getElementById('now_strength');
+        switch(str){
+            case '맹렬한':
+                box.style = 'display:block; background-color: rgb(195,0,255); color:white';
+                box.textContent = '맹렬한';
+                break;
+            case '매우강':
+                box.style = 'display:block; background-color: red; color: white;';
+                box.textContent = '매우강';
+                break;
+            case '강':
+                box.style = 'display:block; background-color: yellow; color:black';
+                box.textContent = '강';
+                break;
+            default:
+                box.style = 'display:none';
+        }
     }
-})
-fetch(`http://192.168.45.190:3000/jp_typhoon?id=${id}`)
-    .then(response => response.json())
-    .then(res => {
-        console.log(res)
-        if (res.length == 0) {
-            document.getElementById('noTyp').style.display = 'block'
+    function area_check(data) {
+        // console.log(data)
+        if (data.radius[0] == '') {
+            return '--'
+        } else if (data.radius[0] == data.radius[1]) {
+            return `반경 ${data.radius[0]}km`
         } else {
-            const ids = []
-            for (var i = 0; i < res.length; i++) {
-                ids.push(res[i].eventID);
-                const nowData = res[i]
-                const button = document.createElement('p');
-                var name = ''
-                if(nowData.body.typhoon.name.text == ''){
-                    name = '열대저기압'
+            return `${data.direction[0]}쪽 ${data.radius[0]}km\n${data.direction[1]}쪽 ${data.radius[1]}km`
+        }
+    }
+    document.getElementById('typ_info').style = 'display:block';
+    if(data.body.typhoon.name.number.length > 1){
+        document.getElementById('typ_name').textContent = `태풍 제${data.body.typhoon.name.number.slice(2)}호 - ${data.body.typhoon.name.text}`;
+    }else{
+        document.getElementById('typ_name').textContent = `발달중인 열대저기압`;
+    }
+    document.getElementById('typ_reportTime').textContent = mon_day_year(data.reportDateTime) + ' 발표';
+    getSize(data.body.info.now.classification.size)
+    getStrength(data.body.info.now.classification.intensity);
+    if(data.body.typhoon.outline){
+        if((data.body.typhoon.remark).includes('소멸')){
+            document.getElementById('typ_outline').textContent = `${data.body.typhoon.remark}`;
+        }else{
+            document.getElementById('typ_outline').textContent = `${data.body.typhoon.outline}\n${data.body.typhoon.remark}`;
+        }
+    }else{
+        document.getElementById('typ_outline').textContent = `${data.body.typhoon.remark}`;
+    }
+    document.getElementById('targetTime').textContent = mon_day(data.targetDateTime) + ' 현재';
+    document.getElementById('center_hPa').textContent = data.body.info.now.center.pressure;
+    document.getElementById('center_speed').textContent = data.body.info.now.wind.average;
+    document.getElementById('center_instwind_speed').textContent = data.body.info.now.wind.instantaneous + 'm/s';
+    var movdir = '';
+    if(data.body.info.now.center.movement.direction){
+        movdir = `${data.body.info.now.center.movement.direction}쪽`
+    }
+    var movspd = data.body.info.now.center.movement.speed;
+    console.log(data.body.info.now.center)
+    if(movspd != '느림' && movspd != '거의 정체') {
+        movspd += 'km/h'
+    }
+    document.getElementById('center_movement').textContent = `${movdir} ${movspd}`;
+    document.getElementById('storm_area').textContent = area_check(data.body.info.now.wind.area.storm);
+    document.getElementById('strong_area').textContent = area_check(data.body.info.now.wind.area.strong);
+    var coord = getCoordinate(data.body.info.now.center.coordinate)
+    document.getElementById('center_coord').textContent = `${coord[0]}N ${coord[1]}E`;
+    document.getElementById('center_acc').textContent = data.body.info.now.center.condition
+
+    var forecastData = data.body.info.forecast;
+    var forecastBox = document.getElementById('forecastBox');
+    for(var i = 0; i < forecastData.length; i++){
+        var nowData = forecastData[i];
+        console.log(nowData)
+        var mainBox = document.createElement('div');
+        mainBox.className = 'forecast_mainBox';
+
+        function createBox(title, content){
+            var box = document.createElement('div');
+            box.className = 'forecast_spe_box';
+
+            var box_title = document.createElement('p');
+            box_title.className = 'forecast_spe_box_title';
+            box_title.textContent = title;
+            box.appendChild(box_title);
+
+            var box_content = document.createElement('h4');
+            box_content.className = 'forecast_spe_box_content';
+            box_content.textContent = content;
+            box.appendChild(box_content);
+
+            table.appendChild(box);
+        }
+
+        if(nowData.isSuitei == false){
+            var time = document.createElement('h4');
+            time.className = 'forecast_time';
+            time.textContent = `예보 - ${toHalfWidth(nowData.elapsedTime.slice(3,-3))}시간 후 (${mon_day(nowData.dateTime).slice(0,-4)})`;
+            mainBox.appendChild(time);
+            var movdir = nowData.center.movement.direction;
+            if(movdir){
+                movdir = `${movdir}쪽 `
+            }else{
+                movdir = ''
+            }
+            var movspd = nowData.center.movement.speed;
+            console.log(nowData.center)
+            console.log(movspd)
+            if(movspd != '느림' && movspd != '거의 정체') {
+                movspd += 'km/h'
+            }
+
+            var table = document.createElement('div');
+            table.className = 'forecast_spe';
+            createBox('중심기압', nowData.center.pressure + 'hPa')
+            createBox('종류', nowData.classification.category)
+            createBox('최대풍속', nowData.wind.average+'m/s')
+            createBox('최대순간풍속', nowData.wind.instantaneous+'m/s')
+            createBox('강도', nowData.classification.intensity)
+            createBox('이동방향・속도', `${movdir}${movspd}`)
+            createBox('예보원', `반경 ${nowData.center.probabilityCircle.radius}km`)
+            createBox('폭풍경계역', `${area_check(nowData.wind.area.stormWarning)}`)
+            mainBox.appendChild(table);
+            // 중심기압 종류 | 최대풍속 최대순간풍속 | 강도 이동방향・속도 | 예보원 폭풍경계역
+        }else{
+            document.getElementById('suiteiON').style = 'display:block';
+            var time = document.createElement('h4');
+            time.className = 'forecast_time';
+            time.textContent = `추정 - 1시간 후 (${mon_day(nowData.dateTime).slice(0,-4)})`;
+            mainBox.appendChild(time);
+        }
+        forecastBox.appendChild(mainBox);
+    }
+}
+
+fetch(`http://localhost:3000/jp_typhoon?id=${id}`)
+    .then(response => response.json())
+    .then(data => {
+        console.log(data); // JSON 데이터 사용
+        console.log(data.length)
+        if (data.length == 0) {
+            // 현재 발생중인 태풍은 없습니다.
+            var box = document.getElementById('typ_list');
+            var noData = document.createElement('h4');
+            noData.textContent = '현재 발생중인 태풍은 없습니다.';
+            box.appendChild(noData);
+            document.getElementById('notyp').style = 'display:block';
+            document.getElementById('typ_all').style = 'display:none';
+        } else if (data.length == 1) {
+            //info + draw
+            mapDraw(data[0]);
+            map.setView(getCoordinate(data[0].body.info.now.center.coordinate), 6);
+            document.getElementById('clickit').style = 'display:none';
+            info(data[0]);
+            if(id == ''){
+                document.getElementById('typ_all').style = 'display:none';
+            }
+        } else {
+            // draw
+            var typ_list_box = document.getElementById('typ_list');
+            const bounds = L.latLngBounds(); // 지도 경계
+            for (var i = 0; i < data.length; i++) {
+                const typhoon = data[i];   // ← 미리 복사
+                console.log(typhoon);
+                mapDraw(typhoon);
+                const centerCoord = getCoordinate(typhoon.body.info.now.center.coordinate);
+                bounds.extend(centerCoord);
+
+                console.log(typhoon.eventID)
+                var typ_list = document.createElement('div')
+                var typ_list_title = document.createElement('h4');
+                if(typhoon.body.typhoon.name.number.length > 1){
+                    typ_list_title.textContent = `태풍 ${typhoon.body.typhoon.name.number.slice(2)}호 ${typhoon.body.typhoon.name.text}`
                 }else{
-                    name = `태풍 ${(nowData.body.typhoon.name.number).slice(2,)}호 ${nowData.body.typhoon.name.text}`
+                    typ_list_title.textContent = `발달중인 열대저기압`
                 }
-                button.textContent = name;
-                button.addEventListener('click', () => {
+                typ_list.appendChild(typ_list_title);
+
+                var typ_list_time = document.createElement('p');
+                typ_list_time.textContent = `${mon_day(typhoon.reportDateTime)} 발표`
+                typ_list_time.className = 'typ_list_time'
+                typ_list.appendChild(typ_list_time);
+
+                var typ_list_out = document.createElement('p');
+                if(typhoon.body.typhoon.outline){
+                    if((typhoon.body.typhoon.remark).includes('소멸')){
+                        typ_list_out.textContent = `${typhoon.body.typhoon.remark}`;
+                    }else{
+                        typ_list_out.textContent = `${typhoon.body.typhoon.outline}\n${typhoon.body.typhoon.remark}`;
+                    }
+                }else{
+                    typ_list_out.textContent = `${typhoon.body.typhoon.remark}`;
+                }
+                typ_list_out.className = 'typ_list_out'
+                typ_list.appendChild(typ_list_out);
+
+                typ_list.addEventListener('click', () => {
                     var protocal = window.location.protocol;
                     var hostname = window.location.host;
-                    var url = protocal + '//' + hostname + `/drr/jp/disaster/typhoon/?id=${nowData.eventID}`
+                    var url = protocal + '//' + hostname + `/drr/jp/disaster/typhoon/?id=${typhoon.eventID}`;
                     window.location.href = url;
                 });
-                document.getElementById('buttonContainer').appendChild(button);
+                typ_list_box.appendChild(typ_list);
             }
-            var index = ids.indexOf(id)
-            if (index == -1) {
-                for (var i = 0; i < res.length; i++) {
-                    const nowData = res[i]
-                    draw(nowData)
-                }
-            } else {
-                draw(res[index])
-                info(res[index])
-            }
-            const button = document.createElement('p');
-            button.textContent = `전체보기`;
-            button.addEventListener('click', () => {
-                var protocal = window.location.protocol;
-                var hostname = window.location.host;
-                var url = protocal + '//' + hostname + `/drr/jp/disaster/typhoon/`
-                window.location.href = url;
-            });
-            document.getElementById('buttonContainer').appendChild(button);
+            map.fitBounds(bounds);
         }
+
     })
-    .catch(error => console.error('Error:', error));
-
-    var isTestLayerVisible = false;
-
-// 버튼 클릭 이벤트 설정
-document.getElementById('rain').addEventListener('click', function() {
-    if (isTestLayerVisible) {
-        map.removeLayer(rainLayer);
-        document.getElementById('rain').textContent = '고해상도 나우캐스트'
-    } else {
-        rainLayer.addTo(map); 
-        document.getElementById('rain').textContent = '레이더 숨기기'
-    }
-    isTestLayerVisible = !isTestLayerVisible; // 상태 반전
-});
+    .catch(error => {
+        console.error('There has been a problem with your fetch operation:', error);
+    });

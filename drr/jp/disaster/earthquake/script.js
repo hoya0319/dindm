@@ -1,5 +1,5 @@
 import mon_day from '../../../../src/time.js'
-const map = L.map('map').setView([36.5, 137.9], 6);
+const map = L.map('map', { zoomControl: false }).setView([36.5, 137.9], 6);
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     minZoom: 4,
@@ -13,13 +13,20 @@ if (searchParams.has('id')) {
 }
 
 function getEarthquakeData() {
-    fetch(`http://192.168.45.190:3000/jp_earthquake?id=${id}`)
+    fetch(`http://localhost:3000/jp_earthquake?id=${id}`)
         .then(response => response.json())
         .then(data => {
             displayEarthquake(data);
         })
         .catch(error => {
-            console.error('Error fetching data:', error);
+            console.log(error);
+            var container = document.getElementById('earthquakeInfo')
+            while (container.firstChild) {
+                container.removeChild(container.firstChild);
+            }
+            var h2 = document.createElement('h2');
+            h2.textContent = '존재하지 않는 ID입니다.';
+            container.appendChild(h2)
         });
 }
 function getCoordinate(coord) {
@@ -100,7 +107,7 @@ let markerLayerGroup = L.layerGroup().addTo(map);
 let currentEarthquakeData = null;
 let currentParaList = null;
 
-fetch('http://192.168.45.190:3000/jp_earthquakeClass')
+fetch('http://localhost:3000/jp_earthquakeClass')
     .then(response => response.json())
     .then(data => {
         geoJsonData = data;
@@ -194,7 +201,7 @@ document.getElementById('areaBtn').addEventListener('click', () => {
             const intensity = getAreaMaxIntensity(code) || '0';
         
             if (name) {
-                layer.bindPopup(`<span style="font-family: 'Pretendard Variable', Pretendard" style="font-size:1.3rem; font-weight: bold">${name}: 진도 ${intensity}</span>`);
+                layer.bindPopup(`<strong style="font-family: 'Noto Sans JP', Pretendard">${name}</strong><br><span style="font-family: 'Pretendard Variable', Pretendard">진도: ${intensity}</span>`);
             }
         }
     }).addTo(map);
@@ -226,7 +233,7 @@ function displayEarthquake(data) {
         iconSize: [35, 35]
     });
 
-    fetch('http://192.168.45.190:3000/jp_earthquakePara')
+    fetch('http://localhost:3000/jp_earthquakePara')
         .then(response => response.json())
         .then(paraData => {
             currentParaList = paraData;
@@ -267,15 +274,19 @@ function displayEarthquake(data) {
     if(data.title == '현저한 지진의 진원 요소 갱신'){
         document.getElementById('reportDateTime').textContent = `${mon_day(data.reportDateTime)} 발표`;
     }else{
-        document.getElementById('reportDateTime').textContent = `${mon_day(data.reportDateTime)} 발표 (제${data.serial}보)`;
+        if(data.serial != 1){
+            document.getElementById('reportDateTime').textContent = `${mon_day(data.reportDateTime)} 발표 (제${data.serial}보)`;
+        }else{
+            document.getElementById('reportDateTime').textContent = `${mon_day(data.reportDateTime)} 발표`;
+        }
     }
     document.getElementById('intValue').textContent = maxIntText;
     document.getElementById('originTime').textContent = mon_day(data.body.earthquake.originTime) + ' 발생';
     document.getElementById('epicenter').textContent = data.body.earthquake.hypocenter.area;
     document.getElementById('depth').textContent = '깊이 ' + data.body.earthquake.hypocenter.coord.depth;
     document.getElementById('forcastComment').textContent = data.body.comments.forecastComment;
-
-    
+    document.getElementById('varComment').textContent = data.body.comments.varComment;
+    document.getElementById('freeFormComment').textContent = data.body.comments.freeFormComment;
     if(data.body.lngIntensity){
         function getLngColor(int) {
             switch (int) {
@@ -457,7 +468,7 @@ function renderByArea() {
 
 getEarthquakeData();
 
-fetch('http://192.168.45.190:3000/jp_earthquakeList')
+fetch('http://localhost:3000/jp_earthquakeList')
     .then(response => response.json())
     .then(data => {
         const listBox = document.getElementById('earthquakeListBox');

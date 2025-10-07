@@ -1,5 +1,5 @@
 import mon_day from '../../../../src/time.js'
-const map = L.map('map').setView([36.5, 137.9], 6);
+const map = L.map('map', { zoomControl: false }).setView([36.5, 137.9], 6);
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     minZoom: 4,
@@ -13,7 +13,7 @@ if (searchParams.has('id')) {
 }
 
 function getEarthquakeData() {
-    fetch(`http://192.168.45.190:3000/jp_lngearthquake?id=${id}`)
+    fetch(`http://localhost:3000/jp_lngearthquake?id=${id}`)
         .then(response => response.json())
         .then(data => {
             console.log(data)
@@ -72,7 +72,7 @@ let markerLayerGroup = L.layerGroup().addTo(map);
 let currentEarthquakeData = null;
 let currentParaList = null;
 
-fetch('http://192.168.45.190:3000/jp_earthquakeClass')
+fetch('http://localhost:3000/jp_earthquakeClass')
     .then(response => response.json())
     .then(data => {
         geoJsonData = data;
@@ -258,7 +258,7 @@ function displayEarthquake(data) {
         iconSize: [35, 35]
     });
 
-    fetch('http://192.168.45.190:3000/jp_earthquakePara')
+    fetch('http://localhost:3000/jp_earthquakePara')
         .then(response => response.json())
         .then(paraData => {
             currentParaList = paraData;
@@ -408,7 +408,7 @@ function renderByArea() {
 
 getEarthquakeData();
 
-// fetch('http://192.168.45.190:3000/jp_earthquakeList')
+// fetch('http://localhost:3000/jp_earthquakeList')
 //     .then(response => response.json())
 //     .then(data => {
 //         const listBox = document.getElementById('earthquakeListBox');
