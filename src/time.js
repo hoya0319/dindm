@@ -8,3 +8,6 @@ export function format1(time) {
 export default function mon_day(time) {
     return `${time.slice(5, 7)}월 ${time.slice(8, 10)}일 ${time.slice(11, 13)}시 ${time.slice(14, 16)}분`
 }
+export function mon_day_year(time) {
+    return `${time.slice(0,4)}년 ${time.slice(5, 7)}월 ${time.slice(8, 10)}일 ${time.slice(11, 13)}시 ${time.slice(14, 16)}분`
+}

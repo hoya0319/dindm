@@ -1,7 +1,7 @@
 import { format1 } from './time.js';
 
 var data
-fetch('http://192.168.45.190:3000/announce')
+fetch('http://localhost:3000/announce')
     .then(response => response.json())
     .then(res => {
         data = res;

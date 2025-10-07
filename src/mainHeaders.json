@@ -1,0 +1,76 @@
+{
+    "contents": [
+        {
+            "title" : "DIN-DM 서비스",
+            "items": [
+                {
+                    "title" : "방재수첩",
+                    "href" : "/note/"
+                },
+                {
+                    "title" : "방재허브",
+                    "items" : [
+                        {
+                            "title" : "한국",
+                            "href" : "/drr/kr/"
+                        },
+                        {
+                            "title" : "일본",
+                            "href" : "/drr/jp/"
+                        },
+                        {
+                            "title" : "세계",
+                            "href" : "/drr/world/"
+                        }
+                    ]
+                },
+                {
+                    "title" : "DRS",
+                    "href" : "/drs/"
+                },
+                {
+                    "title" : "스페셜",
+                    "href" : "/special/"
+                }
+            ]
+        },
+        {
+            "title" : "공지",
+            "items" : [
+                {
+                    "title" : "공지사항",
+                    "href" : "/home/announcement/"
+                },
+                {
+                    "title" : "보도발표",
+                    "href" : "/home/press/"
+                },
+                {
+                    "title" : "칼럼・뉴스",
+                    "href" : "/home/topics/"
+                }
+            ]
+        },
+        {
+            "title" : "DIN-DM에 대해",
+            "items" : [
+                {
+                    "title" : "DIN-DM 소개",
+                    "href" : "/about/"
+                },
+                {
+                    "title" : "이용안내",
+                    "href" : "/about/guide/"
+                },
+                {
+                    "title" : "개인정보처리방침",
+                    "href" : "/about/privacy/"
+                },
+                {
+                    "title" : "이메일무단수집거부",
+                    "href" : "/about/email/"
+                }
+            ]
+        }
+    ]
+}
