@@ -1,0 +1,87 @@
+.main{
+    width:70rem;
+    margin: auto;
+}
+.drrContentSpeBox{
+    display: flex;
+    overflow-x: auto;
+    min-width: 100%;
+}
+.drrContentSpe{
+    min-width:15rem;
+    width:15rem;
+    margin: 1rem;
+    color:#111111;
+    border:1px solid #d8e5fd;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: 0.2s;
+    transition-timing-function: ease-in-out;
+}
+.drrContentTopBox{
+    display: flex;
+    justify-content: space-between;
+}
+.drrContentTopBox > div > img{
+    width:1.5rem;
+    margin:0 0.5rem;
+    border:1px solid #757577;
+    border-radius: 100%;
+    padding:0.2rem;
+    cursor: pointer;
+}
+.drrContentTopBox > div > img:hover{
+    background-color: rgba(0, 0, 0, 0.05);
+}
+.drrContentSpeImg{
+    width:100%;
+    height:11rem;
+    object-fit: cover;
+}
+.drrContentBox{
+    border:1px solid #d8e5fd;
+    box-shadow: 0 0.2rem 0.8rem 0 rgba(0, 0, 0, 0.04);
+    padding:1rem;
+    margin:1rem 0;
+    border-radius: 10px;
+}
+.drrContentSpeTitle, .drrContentSpeDes{
+    margin:0 0.4rem;
+}
+.drrContentSpeDes{
+    margin-bottom: 0.7rem;
+    font-size: 1rem;
+}
+.drrContentSpe:hover{
+    transform: scale(1.01);
+    transition: 0.2s;
+    transition-timing-function: ease-in-out;
+}
+@media (max-width: 1200px) {
+    .main{
+        width: 50rem;
+    }
+}
+@media (max-width: 1040px) {
+    .main{
+        width: 70%;
+    }
+    .drrContentSpeImg{
+        height: 7rem;
+    }
+    .drrContentSpe{
+        min-width:10rem;
+        width: 10rem;
+    }
+    .drrContentSpeTitle{
+        font-size: 1.1rem;
+    }
+    .drrContentSpeDes{
+        font-size: 0.85rem;
+    }
+}
+@media (max-width: 600px) {
+    .main{
+        width: 90%;
+    }
+}

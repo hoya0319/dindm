@@ -1,0 +1,132 @@
+#drrMenuBox{
+    margin-top:3rem;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, .04), 0 2px 3px 0 rgba(0, 0, 0, .12);
+    height:2.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position:relative;
+    background-color: #f9f9f9;
+    z-index: 1000;
+}
+.drrMenuTop{
+    background-color: rgba(9, 23, 166, 1);
+    color:white;
+    font-weight: bold;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding:0 1rem;
+    font-size: 1rem;
+}
+.drrMenuTop:hover{
+    background-color: rgba(9, 23, 166, 0.9);
+}
+.drrMenuBox{
+    height:100%;
+    /* margin:0 1rem; */
+    display: flex;
+    align-items: center;
+}
+.drrMenuTitle{
+    font-weight: bold;
+    color: #757577;
+    height:100%;
+    display: flex;
+    align-items: center;
+    padding:0rem 1rem 0rem 1rem;
+    width:100%;
+    white-space: nowrap;
+}
+.drrMenuMainBox{
+    display: flex;
+    height: 100%;
+    max-width: calc(100vw - 130px);
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+.drrMenuMainBox::-webkit-scrollbar {
+	display:none /* Chrome , Safari , Opera */
+}
+.drrMenuBox:hover{
+    background-color: rgba(0,0,0,0.05);
+}
+.drrMenuIcon{
+    width:1.2rem;
+    height:1.2rem;
+    border:1px solid #757577;
+    margin-right: 1rem;
+    border-radius: 5px;
+}
+.drrMenuIcon:hover{
+    cursor: pointer;
+}
+.drrMenuArrow{
+    width:1rem;
+    border:1px solid #757577;
+    border-radius: 5px;
+    padding:0.2rem;
+    margin: 0 0.3rem;
+    cursor: pointer;
+    display: none;
+}
+.drrMenuArrow:hover{
+    background-color: rgba(0,0,0,0.05);
+}
+#dropDownContainer{
+    position: absolute;
+    z-index: 1000;
+    width:100%;
+    padding:2rem 0;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, .04), 0 2px 3px 0 rgba(0, 0, 0, .12);
+    background-color: white;
+    display: none;
+}
+.dropDownBox h2, .dropDownBox p{
+    width: 60%;
+    margin:auto;
+}
+.drrLinkBox{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 90%;
+    margin: auto;
+    margin-top:1rem;
+}
+.drrLinkBox a{
+    color: #757577;
+    font-weight: 600;
+    font-size: 1.2rem;
+    padding: 0 1rem;
+    border-right: 1px solid #757577;
+    display: flex;
+    align-items: center;
+    line-height: 10px;
+    margin: 0.2rem 0;
+}
+.drrLinkBox a:nth-child(1){
+    border-left: 1px solid #757577;
+}
+.drrLinkBox a >img{
+    height:1rem;
+    margin-left: 1rem;
+}
+@media (max-width: 768px) {
+    #drrMenuBox{
+        justify-content: flex-start;
+    }
+    .drrMenuMainBox{
+        display: flex;
+        height: 100%;
+        max-width: calc(100vw - 200px);
+        overflow-x: auto;
+        overflow-y: hidden;
+    }
+    .drrMenuArrow{
+        display: block;
+    }
+    .drrLinkBox a{
+        font-size: 1rem;
+    }
+}
