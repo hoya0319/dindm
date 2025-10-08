@@ -51,6 +51,7 @@
 .drrContentSpeDes{
     margin-bottom: 0.7rem;
     font-size: 1rem;
+    word-break: normal;
 }
 .drrContentSpe:hover{
     transform: scale(1.01);
