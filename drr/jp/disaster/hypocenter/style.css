@@ -1,0 +1,38 @@
+.dateBtn{
+    cursor: pointer;
+    padding: 0.2rem 0.4rem;
+    margin: 0.3rem 0.2rem;
+    border:1px solid black;
+    border-radius: 5px;
+}
+#dateButtons{
+    margin-top:1rem;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.dateBtn:hover{
+    background-color: rgba(0,0,0,0.05);
+}
+#sliderBox div{
+    margin-top: 0.5rem;
+    display: flex;
+}
+#hourSlider{
+    width:70%;
+}
+#allTimeBtn{
+    width:25%;
+    text-align: center;
+    margin-left: 5%;
+    border-radius: 5px;
+}
+#allTimeBtn:hover{
+    cursor: pointer;
+    background-color: rgba(0,0,0,0.05);
+}
+.dateBtn{
+    width:25%;
+    text-align: center;
+}

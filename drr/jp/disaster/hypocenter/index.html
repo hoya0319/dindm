@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko-kr">
+<head>
+    <title>방재허브_일본 - 진앙분포</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="/drr/jp/style.css">
+    <link rel="stylesheet" href="/drr/jp/disaster/style.css">
+    <link rel="stylesheet" href="/drr/jp/disaster/hypocenter/style.css">
+    <link href="/all.css" rel="stylesheet">
+    <link href="/drr/style_menuBar.css" rel="stylesheet">
+    <link rel="icon" type="image/png" href="/favicon.ico"/>
+</head>
+<body>
+    <header id="mainHeader"></header>
+    <div id="mainMenuBox"></div>
+    <div id="drrMenuBox">
+    </div>
+    <div id="dropDownContainer"></div>
+    <div id="tools">
+    </div>
+    <div class="content">
+        <!-- <div id="announce">
+        </div> -->
+        <div class="contentTop">
+            <h2>진앙분포</h2>
+        </div>
+        <div class="contentBox">
+            <div class="left">
+                <div id="map"></div>
+                <div class="map_bar">
+                    <div id="legend">
+                    </div>
+                </div>
+            </div>
+            <div class="right">
+                <div class="right_box">
+                    <div id="controls">
+                        <div id="sliderBox">
+                            <h3><span id="nowDate"></span><span id="nowTime"></span></h3>
+                            <div>
+                                <input type="range" id="hourSlider" min="0" max="23" value="0" />
+                                <p id="allTimeBtn">전체시간</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="dateButtons"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script type="module" src="/drr/jp/disaster/hypocenter/script.js"></script>
+<script src="/src/mainHeaders.js"></script>
+<script src="/src/tools.js"></script>
+<script src="/drr/src/menubar.js"></script>
+<!-- <script type="module" src="/src/announce.js"></script> -->
+</html>
