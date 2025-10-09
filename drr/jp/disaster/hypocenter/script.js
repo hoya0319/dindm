@@ -88,9 +88,13 @@ function updateMap(features) {
                 console.warn('잘못된 좌표:', coords);
                 return null;
             }
+            var rad = 2 + (isNaN(mag) ? 0 : mag * 2)
+            if(rad < 2.5){
+                rad = 2.5
+            }
 
             return L.circleMarker([lat, lon], {
-                radius: 2 + (isNaN(mag) ? 0 : mag * 2),
+                radius: rad,
                 fillColor: getDepthColor(dep),
                 color: '#000',
                 weight: 0.5,
@@ -186,4 +190,5 @@ document.getElementById('allTimeBtn').addEventListener('click', () => {
     updateMap(allFeatures);
     document.getElementById('timeSlider').value = 24;
     document.getElementById('nowTime').textContent = `전체 (${allFeatures.length}회 발생)`;
+
 });
