@@ -26,13 +26,15 @@ logoBox.href = '/';
 
 const logo = document.createElement('h1');
 logo.className = 'mainHeaderLogoTitle';
-logo.textContent = 'YAAID';
+logo.textContent = 'DIN-DM';
 logoBox.appendChild(logo);
 divElement.appendChild(logoBox);
 
 header_container.append(divElement);
 
-var mainMenuBox = document.getElementById('mainMenuBox');
+// var mainMenuBox = document.getElementById('mainMenuBox');
+var mainMenuBox = document.createElement('div')
+mainMenuBox.setAttribute('id', "mainMenuBox")
 fetch('/src/mainHeaders.json')
     .then(response => response.json())
     .then(jsonData => {
@@ -104,6 +106,7 @@ fetch('/src/mainHeaders.json')
     .catch(error => {
         console.error('JSON 불러오기 실패:', error);
     });
+header_container.appendChild(mainMenuBox)
 
 var clickCount = 0;
 menu.addEventListener("click", function () {

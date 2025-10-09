@@ -224,6 +224,7 @@ a{
     z-index: 9999;
     display: none;
     overflow-y: auto;
+    border-top: 1px solid black;
 }
 .menuContentBox{
     display: flex;
