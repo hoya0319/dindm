@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>방재허브_일본 - 공지</title>
+    <link href="/all.css" rel="stylesheet">
+    <link href="/drr/drr.css" rel="stylesheet">
+    <link href="/drr/jp/announce/notice/style.css" rel="stylesheet">
+    <link href="/drr/style_menuBar.css" rel="stylesheet">
+</head>
+
+<body>
+    <header id="mainHeader"></header>
+    <div id="drrMenuBox">
+    </div>
+    <div id="dropDownContainer"></div>
+    <div id="body">
+        <div id="announce">
+        </div>
+        <div id="tools">
+        </div>
+        <div class="main">
+            <h2>공지</h2>
+            <div class="announce">
+                <div class="announcebox" id="hello">
+                    <div class="announceboxtop">
+                        <h4>테스트 공지1입니다.</h4>
+                        <p>2025년 10월 10일 18:00</p>
+                    </div>
+                    <div class="announce-content">
+                        <p>ㅁㄴㅇㄻㅇㄴㄹ</p>
+                    </div>
+                    <div class="btnbox">
+                        <button class="more-btn">
+                            더보기
+                            <img src="/drr/img/dropDown.svg" alt="더보기" class="icon">
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+<script type="module" src="/src/announce.js"></script>
+<script src="/src/mainHeaders.js"></script>
+<script src="/src/tools.js"></script>
+<script src="/drr/src/menubar.js"></script>
+<script>
+    document.querySelectorAll('.announcebox').forEach(box => {
+        const btn = box.querySelector('.more-btn');
+        const icon = btn.querySelector('.icon');
+        const content = box.querySelector('.announce-content');
+        const top = box.querySelector('.announceboxtop');
+
+        const toggleBox = () => {
+            const isOpen = box.classList.toggle('open');
+            if (isOpen) {
+                content.style.maxHeight = content.scrollHeight + 'px';
+                btn.firstChild.textContent = '닫기';
+            } else {
+                content.style.maxHeight = 0;
+                btn.firstChild.textContent = '더보기';
+            }
+        };
+
+        btn.addEventListener('click', toggleBox);
+        top.addEventListener('click', toggleBox);
+    });
+</script>
