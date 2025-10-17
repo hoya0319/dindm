@@ -1,0 +1,383 @@
+{
+    "title": "체크리스트",
+    "store": {
+        "title": "비축 물품 체크리스트",
+        "id": "store",
+        "iconid": "cart",
+        "contents": [
+            {
+                "title": "비축품 리스트",
+                "items": [
+                    {
+                        "type": "식품",
+                        "item": [
+                            {
+                                "name": "물",
+                                "id" : "water",
+                                "description": "1인 1일 3L 권장",
+                                "checked": false,
+                                "personal": [
+                                    {
+                                        "memo": "",
+                                        "date": ""
+                                    }
+                                ]
+                            },{
+                                "name": "주식",
+                                "id" : "food",
+                                "description": "즉석밥, 라면 등",
+                                "checked": false,
+                                "personal": [
+                                    {
+                                        "memo": "",
+                                        "date": ""
+                                    }
+                                ]
+                            },{
+                                "name": "레트로트 식품",
+                                "id" : "retort",
+                                "description": "",
+                                "checked": false,
+                                "personal": [
+                                    {
+                                        "memo": "",
+                                        "date": ""
+                                    }
+                                ]
+                            },{
+                                "name": "통조림",
+                                "id" : "can",
+                                "description": "",
+                                "checked": false,
+                                "personal": [
+                                    {
+                                        "memo": "",
+                                        "date": ""
+                                    }
+                                ]
+                            },{
+                                "name": "간식류",
+                                "id" : "snack",
+                                "description": "과자, 초콜릿, 사탕 등",
+                                "checked": false,
+                                "personal": [
+                                    {
+                                        "memo": "",
+                                        "date": ""
+                                    }
+                                ]
+                            },{
+                                "name": "영양보조식품 등",
+                                "id" : "dietary",
+                                "description": "",
+                                "checked": false,
+                                "personal": [
+                                    {
+                                        "memo": "",
+                                        "date": ""
+                                    }
+                                ]
+                            },{
+                                "name": "조미료",
+                                "id" : "salt",
+                                "description": "소금, 설탕 등",
+                                "checked": false,
+                                "personal": [
+                                    {
+                                        "memo": "",
+                                        "date": ""
+                                    }
+                                ]
+                            },{
+                                "name": "큰 물통 등",
+                                "id" : "bottle",
+                                "description": "",
+                                "checked": false,
+                                "personal": [
+                                    {
+                                        "memo": "",
+                                        "date": ""
+                                    }
+                                ]
+                            }
+                        ]
+                    },{
+                        "type": "생활용품",
+                        "item": [
+                            {
+                                "name": "생활용수",
+                                "id" : "lifewater",
+                                "description": "설거지, 빨래 등을 위한 물",
+                                "checked": false,
+                                "personal": [
+                                    {
+                                        "memo": "",
+                                        "date": ""
+                                    }
+                                ]
+                            },{
+                                "name": "쓰레기 봉투",
+                                "id" : "trash",
+                                "description": "",
+                                "checked": false,
+                                "personal": [
+                                    {
+                                        "memo": "",
+                                        "date": ""
+                                    }
+                                ]
+                            },{
+                                "name": "비닐봉지",
+                                "id" : "bag",
+                                "description": "",
+                                "checked": false,
+                                "personal": [
+                                    {
+                                        "memo": "",
+                                        "date": ""
+                                    }
+                                ]
+                            },{
+                                "name": "구급상자",
+                                "id" : "aid",
+                                "description": "",
+                                "checked": false,
+                                "personal": [
+                                    {
+                                        "memo": "",
+                                        "date": ""
+                                    }
+                                ]
+                            },{
+                                "name": "조리용 랩",
+                                "id" : "lap",
+                                "description": "",
+                                "checked": false,
+                                "personal": [
+                                    {
+                                        "memo": "",
+                                        "date": ""
+                                    }
+                                ]
+                            },{
+                                "name": "휴지・두루마리 휴지",
+                                "id" : "tissue",
+                                "description": "",
+                                "checked": false,
+                                "personal": [
+                                    {
+                                        "memo": "",
+                                        "date": ""
+                                    }
+                                ]
+                            },{
+                                "name": "물티슈",
+                                "id" : "wet",
+                                "description": "",
+                                "checked": false,
+                                "personal": [
+                                    {
+                                        "memo": "",
+                                        "date": ""
+                                    }
+                                ]
+                            },{
+                                "name": "생리용품",
+                                "id" : "woman",
+                                "description": "",
+                                "checked": false,
+                                "personal": [
+                                    {
+                                        "memo": "",
+                                        "date": ""
+                                    }
+                                ]
+                            },{
+                                "name": "핫팩",
+                                "id" : "hotpack",
+                                "description": "",
+                                "checked": false,
+                                "personal": [
+                                    {
+                                        "memo": "",
+                                        "date": ""
+                                    }
+                                ]
+                            },{
+                                "name": "라이터",
+                                "id" : "lighter",
+                                "description": "",
+                                "checked": false,
+                                "personal": [
+                                    {
+                                        "memo": "",
+                                        "date": ""
+                                    }
+                                ]
+                            },{
+                                "name": "보조배터리",
+                                "id" : "phonebattery",
+                                "description": "가정 내에서 사용하고 있는 휴대폰 대수만큼",
+                                "checked": false,
+                                "personal": [
+                                    {
+                                        "memo": "",
+                                        "date": ""
+                                    }
+                                ]
+                            },{
+                                "name": "라텍스 장갑",
+                                "id" : "hand",
+                                "description": "",
+                                "checked": false,
+                                "personal": [
+                                    {
+                                        "memo": "",
+                                        "date": ""
+                                    }
+                                ]
+                            },{
+                                "name": "휴대용 가스레인지 및 가스",
+                                "id" : "gas",
+                                "description": "",
+                                "checked": false,
+                                "personal": [
+                                    {
+                                        "memo": "",
+                                        "date": ""
+                                    }
+                                ]
+                            },{
+                                "name": "상비약",
+                                "id" : "drug",
+                                "description": "",
+                                "checked": false,
+                                "personal": [
+                                    {
+                                        "memo": "",
+                                        "date": ""
+                                    }
+                                ]
+                            },{
+                                "name": "손전등",
+                                "id" : "light",
+                                "description": "",
+                                "checked": false,
+                                "personal": [
+                                    {
+                                        "memo": "",
+                                        "date": ""
+                                    }
+                                ]
+                            },{
+                                "name": "건전지",
+                                "id" : "battery",
+                                "description": "",
+                                "checked": false,
+                                "personal": [
+                                    {
+                                        "memo": "",
+                                        "date": ""
+                                    }
+                                ]
+                            },{
+                                "name": "재난용 자가발전 라디오",
+                                "id" : "radio",
+                                "description": "",
+                                "checked": false,
+                                "personal": [
+                                    {
+                                        "memo": "",
+                                        "date": ""
+                                    }
+                                ]
+                            },{
+                                "name": "양치도구",
+                                "id" : "tooth",
+                                "description": "",
+                                "checked": false,
+                                "personal": [
+                                    {
+                                        "memo": "",
+                                        "date": ""
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },{
+                "title": "귀중품 리스트",
+                "items": [
+                    {
+                        "type": "귀중품",
+                        "item": [
+                            {
+                                "name": "신분증",
+                                "id" : "id",
+                                "description": "주민등록증이나 운전면허증 등",
+                                "checked": false,
+                                "personal": [
+                                    {
+                                        "memo": "",
+                                        "date": ""
+                                    }
+                                ]
+                            },{
+                                "name": "통장",
+                                "id" : "bank",
+                                "description": "",
+                                "checked": false,
+                                "personal": [
+                                    {
+                                        "memo": "",
+                                        "date": ""
+                                    }
+                                ]
+                            },{
+                                "name": "인감",
+                                "id" : "seal",
+                                "description": "",
+                                "checked": false,
+                                "personal": [
+                                    {
+                                        "memo": "",
+                                        "date": ""
+                                    }
+                                ]
+                            },{
+                                "name": "가족사진",
+                                "id" : "photo",
+                                "description": "",
+                                "checked": false,
+                                "personal": [
+                                    {
+                                        "memo": "",
+                                        "date": ""
+                                    }
+                                ]
+                            },{
+                                "name": "문서 등",
+                                "id" : "docs",
+                                "description": "",
+                                "checked": false,
+                                "personal": [
+                                    {
+                                        "memo": "",
+                                        "date": ""
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    "indoor": {
+        "title": "store",
+        "id": "indoor",
+        "iconid": "shelves",
+        "contents": []
+    }
+}

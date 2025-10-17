@@ -1,0 +1,57 @@
+.checklistItem{
+    display: flex;
+    justify-content: space-between;
+    /* margin-top: 1rem; */
+    padding: 1rem 1rem 1rem 0;
+    margin-left: 2rem;
+}
+.checklistItem:nth-child(n+2){
+    border-top: 1px dotted #ccc;
+}
+.checklistItems h3{
+    margin-top: 1rem;
+    border-bottom: 1px solid #ccc;
+    padding:0.3rem;
+}
+.checklistItemLeftBox label{
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+.memoSet > * {
+    margin: 0 0.3rem;
+}
+.addMemoBtn{
+    margin: 0.3rem;
+}
+.memoSet:nth-child(n+2){
+    margin-top:0.5rem;
+}
+#exportbtn, #importbtn{
+    display: inline-block;
+    margin: 0.5rem;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    border:1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: white;
+}
+#exportbtn:hover, #importbtn:hover{
+    background-color: #fafafa;
+}
+.export{
+    display: flex;
+    justify-content: flex-end;
+}
+button{
+    background-color: white;
+    border:1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+}
+@media screen and (max-width : 1040px) {
+    .checklistItem{
+        flex-direction: column;
+    }
+}

@@ -1,0 +1,199 @@
+{
+    "title": "방재수첩",
+    "href": "/dip/notes/",
+    "contents": [
+        {
+            "title" : "지진・해일",
+            "description" : "",
+            "id" : "earthquake",
+            "class": "div3",
+            "items" : [
+                {
+                    "title": "지진이란",
+                    "href" : "/dip/notes/earthquake/earthquake/",
+                    "description" : "지진의 발생 메커니즘이나 용어, 지진속보에 대해 알아보기"
+                },{
+                    "title": "지진 발생, 그 순간",
+                    "href" : "/dip/notes/earthquake/",
+                    "description" : "지진 발생 그 순간, 어떻게 행동하면 좋을지 알아보기"
+                },{
+                    "title": "발생 후의 대피와 이동",
+                    "href" : "/dip/notes/earthquake/",
+                    "description" : "지진 발생 후, 대피와 이동 시의 주의점에 대해 알아보기"
+                },{
+                    "title": "지진에 대비하기",
+                    "href" : "/dip/notes/earthquake/",
+                    "description" : "지진이 일어나기 전에 가능한 대비 방법에 대해 알아보기"
+                },{
+                    "title": "해일",
+                    "href" : "/dip/notes/earthquake/",
+                    "description" : "해일이 발생하는 원리와 대피 방법에 대해 알아보기"
+                },{
+                    "title": "발생이 예상되는 거대지진",
+                    "href" : "/dip/notes/earthquake/",
+                    "description" : "발생이 예상되는 거대지진에 대해 알아보기"
+                }
+            ]
+        },
+        {
+            "title" : "태풍・호우",
+            "description" : "",
+            "id" : "rain",
+            "class": "div3",
+            "items" : [
+                {
+                    "title": "태풍이란",
+                    "href" : "/dip/notes/rain/",
+                    "description" : "태풍의 발생 메커니즘과 영향, 그로 인한 재해에 대해 알아보기"
+                },{
+                    "title": "토사재해",
+                    "href" : "/dip/notes/rain/",
+                    "description" : "많은 비가 내리면 발생하기 쉬운 토사재해에 대해 알아보기"
+                },{
+                    "title": "집중호우・선상강수대",
+                    "href" : "/dip/notes/rain/",
+                    "description" : "최근 급증하고 있는 집중호우에 대해 알아보기"
+                },{
+                    "title": "수해 발생 시 행동",
+                    "href" : "/dip/notes/rain/",
+                    "description" : "많은 비가 내려 홍수가 발생하기 시작할 때 어떻게 행동하면 좋을까요."
+                },{
+                    "title": "풍수해 시의 대피",
+                    "href" : "/dip/notes/rain/",
+                    "description" : "풍수해 발생 시의 대피 방법과 주의점을 확인할 수 있어요."
+                },{
+                    "title": "자동차가 침수되었을 때",
+                    "href" : "/dip/notes/rain/",
+                    "description" : "자동차가 침수되었을 때 어떻게 행동할지 확인할 수 있어요."
+                }
+            ]
+        },
+        {
+            "title" : "그 외 재해",
+            "description" : "",
+            "id" : "else",
+            "class": "divall",
+            "items" : [
+                {
+                    "title": "낙뢰",
+                    "href" : "/dip/notes/etc/",
+                    "id" : "lightning",
+                    "description" : ""
+                },{
+                    "title": "토네이도",
+                    "href" : "/dip/notes/etc/",
+                    "id" : "tornado",
+                    "description" : ""
+                },{
+                    "title": "폭설",
+                    "href" : "/dip/notes/etc/",
+                    "id" : "heavysnow",
+                    "description" : ""
+                },{
+                    "title": "화산분화",
+                    "href" : "/dip/notes/etc/",
+                    "id" : "volcano",
+                    "description" : ""
+                },{
+                    "title": "폭염",
+                    "href" : "/dip/notes/etc/",
+                    "id" : "hot",
+                    "description" : ""
+                },{
+                    "title": "산불",
+                    "href" : "/dip/notes/etc/",
+                    "id" : "forestfire",
+                    "description" : ""
+                },{
+                    "title": "민방공",
+                    "href" : "/dip/notes/etc/",
+                    "id" : "civildefense",
+                    "description" : ""
+                },{
+                    "title": "감염병",
+                    "href" : "/dip/notes/etc/",
+                    "id" : "disease",
+                    "description" : ""
+                }
+            ]
+        },
+        {
+            "title" : "행동을 시작하기 - 지금 가능한 대비부터",
+            "description" : "",
+            "id" : "start",
+            "class": "div2",
+            "items" : [
+                {
+                    "title": "일상에서 가능한 방재",
+                    "href" : "/dip/notes/start/",
+                    "id" : "phone",
+                    "description" : "일상 생활속에서 실천할 수 있는 방재에 대해 알아보기"
+                },{
+                    "title": "외출시에 가능한 방재",
+                    "href" : "/dip/notes/start/",
+                    "id" : "walk",
+                    "description" : "외출시에 실천할 수 있는 방재에 대해 알아보기"
+                },{
+                    "title": "체크리스트",
+                    "href" : "/dip/notes/start/checklist/",
+                    "id" : "startmove",
+                    "description" : "재해에 대비하여 생활 필수품을 미리 구비하고 대비하기"
+                },{
+                    "title": "재해 후의 대응",
+                    "href" : "/dip/notes/start/",
+                    "id" : "people",
+                    "description" : "재해 발생 후 어떻게 대응할지 미리 생각해두기"
+                }
+            ]
+        },
+        {
+            "title" : "방재 TIPS",
+            "description" : "",
+            "id" : "tips",
+            "class": "div3",
+            "items" : [
+                {
+                    "title": "응급처치",
+                    "href" : "/dip/notes/tips/",
+                    "id" : "heart",
+                    "description" : "기본적인 응급처치의 방법과 주의점"
+                },{
+                    "title": "부상자 대응",
+                    "href" : "/dip/notes/tips/",
+                    "id" : "hurt",
+                    "description" : "이송 방법과 적절한 자세에 대해"
+                },{
+                    "title": "구조방법",
+                    "href" : "/dip/notes/tips/",
+                    "id" : "resque",
+                    "description" : "안전한 구조활동을 위해"
+                },{
+                    "title": "소화기구",
+                    "href" : "/dip/notes/tips/",
+                    "id" : "fire_ext",
+                    "description" : "소화기나 소화전의 올바른 사용 방법"
+                },{
+                    "title": "대피생활",
+                    "href" : "/dip/notes/tips/",
+                    "id" : "evacuate",
+                    "description" : "대피소에서의 생활의 주의점"
+                },{
+                    "title": "방범대책",
+                    "href" : "/dip/notes/tips/",
+                    "id" : "crime",
+                    "description" : "재해시의 치안 악화에 대비한 방범 대책"
+                },{
+                    "title": "건강관리",
+                    "href" : "/dip/notes/tips/",
+                    "id" : "health",
+                    "description" : "이코노미클래스 증후군 등의 예방법"
+                },{
+                    "title": "아기를 지키는 방재",
+                    "href" : "/dip/notes/tips/",
+                    "id" : "baby",
+                    "description" : "아이를 지키기 위한 필요한 대비"
+                }
+            ]
+        }
+    ]
+}
