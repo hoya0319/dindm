@@ -13,7 +13,7 @@ if (searchParams.has('id')) {
 }
 
 function getEarthquakeData() {
-    fetch(`http://localhost:3000/jp_earthquake?id=${id}`)
+    fetch(`http://118.222.83.147:3000/jp_earthquake?id=${id}`)
         .then(response => response.json())
         .then(data => {
             displayEarthquake(data);
@@ -107,7 +107,7 @@ let markerLayerGroup = L.layerGroup().addTo(map);
 let currentEarthquakeData = null;
 let currentParaList = null;
 
-fetch('http://localhost:3000/jp_earthquakeClass')
+fetch('http://118.222.83.147:3000/jp_earthquakeClass')
     .then(response => response.json())
     .then(data => {
         geoJsonData = data;
@@ -233,7 +233,7 @@ function displayEarthquake(data) {
         iconSize: [35, 35]
     });
 
-    fetch('http://localhost:3000/jp_earthquakePara')
+    fetch('http://118.222.83.147:3000/jp_earthquakePara')
         .then(response => response.json())
         .then(paraData => {
             currentParaList = paraData;
@@ -468,7 +468,7 @@ function renderByArea() {
 
 getEarthquakeData();
 
-fetch('http://localhost:3000/jp_earthquakeList')
+fetch('http://118.222.83.147:3000/jp_earthquakeList')
     .then(response => response.json())
     .then(data => {
         const listBox = document.getElementById('earthquakeListBox');
@@ -572,4 +572,5 @@ fetch('http://localhost:3000/jp_earthquakeList')
     })
     .catch(error => {
         console.error('jp_earthquakeList 요청 실패:', error);
+
     });
